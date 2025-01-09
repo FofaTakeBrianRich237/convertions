@@ -28,8 +28,8 @@ void main_menu()
     if(GetAsyncKeyState(0X0D))  break;
     Sleep(100);
   }
-  if(a == 0)
-  else if (a == 1)
+  if(a == 0) // hello
+  else if (a == 1) // hello
 }
 
 

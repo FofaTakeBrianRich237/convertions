@@ -13,13 +13,13 @@ void main_menu()
     if(a == 0)  cout << "\033[31m" << "CONVERTIONS" << "\033[37m" << endl << "add a convertion" << endl << "exit" << endl;
     else if(a == 1) cout << "convertions" << endl << "\033[31m" << "ADD A CONVERTION" <<  "\033[37m" << endl <<  "exit" << endl; 
     else cout << "convertions"  << endl << "add a convertion" << endl << "\033[31m" << "EXIT" << "\033[37m" << endl;
-    if(GetAsyncKeyState(Vk_UP))  
+    if(GetAsyncKeyState(VK_UP))  
     {
       if(a ==0) a = 2;
       else if (a == 1) a = 0;
       else a = 1;
     }
-    if(GetAsyncKeyState(Vk_DOWN))  
+    if(GetAsyncKeyState(VK_DOWN))  
     { 
       if(a == 0) a = 1;
       else if (a == 1) a = 2;

@@ -1,5 +1,5 @@
-#include "../header/display.h"
-#include "../header/mecanic.h"
+#include "header/display.h"
+#include "header/mecanic.h"
 
 int main()
 {

@@ -479,49 +479,49 @@ double miles_to_meter(CONVERTION &convertion, int dest, double valeur)
     {
         case 0: //MILES_TO_KILOMETER
         {
-            convert = valeur *1609.34
+            convert = valeur *1609.34;
             convertion.valeur = convert;
             convert = (convertion, 3, 0, 21);
             break;
         }
         case 1: //MILES_TO_HECTOMETER
         {
-            convert = valeur *1609.34
+            convert = valeur *1609.34;
             convertion.valeur = convert;
             convert = (convertion, 3, 1, 22);
             break;
         }
         case 2: //MILES_TO_DECAMETER   
         {
-            convert = valeur *1609.34
+            convert = valeur *1609.34;
             convertion.valeur = convert;
             convert = (convertion, 3, 2, 23);
             break;
         }
         case 3: //MILES_TO_METER
         {
-            convert = valeur *1609.34
+            convert = valeur *1609.34;
             convertion.valeur = convert;
             convert = (convertion, 3, 3, 24);
             break;
         }
         case 4: //MILES_TO_DECIMETER
         {
-            convert = valeur *1609.34
+            convert = valeur *1609.34;
             convertion.valeur = convert;
             convert = (convertion, 3, 4, 25);
             break;
         }
         case 5: //MILES_TO_CENTIMETER
         {
-            convert = valeur *1609.34
+            convert = valeur *1609.34;
             convertion.valeur = convert;
             convert = (convertion, 3, 5, 26);
             break;
         }
         case 6: //MILES_TO_MILLIMETER
         {
-            convert = valeur *1609.34
+            convert = valeur *1609.34;
             convertion.valeur = convert;
             convert = (convertion, 3, 6, 27);
             break;

@@ -1,7 +1,432 @@
+#include<math.h>
 #include<iostream>
 #include "../header/mecanic.h"
 
-double Basic_convert(CONVERTION &convertion)
+/*POUR LES CONVERSOINS DE TYPES BASIQUE*/
+double Basic_convert(CONVERTION &convertion, int source, int dest, int situation)
 {
-	
+    convertion.prefixe= (PREFIX)source;
+    double convert = 0.0;
+    switch (situation)
+    {
+        //------------situation du kilo
+        case 0: //KILO_TO_KILO
+        {
+            if (convertion.prefixe == 0 && dest == 0)
+            {
+                convert = convertion.valeur * pow(10, 0);
+            }
+            break;
+        }
+        case 1: //KILO_TO_HECTO
+        {
+            if (convertion.prefixe == 0 && dest == 1)
+            {
+                convert = convertion.valeur * pow(10, 1);
+            }
+            break;
+        }
+        case 2: //KILO_TO_DECA
+        {
+            if (convertion.prefixe == 0 && dest == 2)
+            {
+                convert = convertion.valeur * pow(10, 2);
+            }
+            break;
+        }
+        case 3: //KILO_TO_BASE
+        {
+            if (convertion.prefixe == 0 && dest == 3)
+            {
+                convert = convertion.valeur * pow(10, 3);
+            }
+            break;
+        }
+        case 4: //KILO_TO_DECI
+        {
+            if (convertion.prefixe == 0 && dest == 4)
+            {
+                convert = convertion.valeur * pow(10, 4);
+            }
+            break;
+        }
+        case 5: //KILO_TO_CENTI
+        {
+            if (convertion.prefixe == 0 && dest == 5)
+            {
+                convert = convertion.valeur * pow(10, 5);
+            }
+            break;
+        }
+        case 6: //KILO_TO_MILLI
+        {
+           if (convertion.prefixe == 0 && dest == 6)
+            {
+                convert = convertion.valeur * pow(10, 6);
+            }
+            break;
+        }
+
+        //------------situation du hecto
+        case 7: //HECTO_TO_KILO
+        {
+            if (convertion.prefixe == 1 && dest == 0)
+            {
+                convert = convertion.valeur * pow(10, -1);
+            }
+            break;
+        }
+        case 8: //HECTO_TO_HECTO
+        {
+            if (convertion.prefixe == 1 && dest == 1)
+            {
+                convert = convertion.valeur * pow(10, 0);
+            }
+            break;
+        }
+        case 9: //HECTO_TO_DECA
+        {
+            if (convertion.prefixe == 1 && dest == 2)
+            {
+                convert = convertion.valeur * pow(10, 1);
+            }
+            break;
+        }
+        case 10: //HECTO_TO_BASE
+        {
+            if (convertion.prefixe == 1 && dest == 3)
+            {
+                convert = convertion.valeur * pow(10, 2);
+            }
+            break;
+        }
+        case 11: //HECTO_TO_DECI
+        {
+            if (convertion.prefixe == 1 && dest == 4)
+            {
+                convert = convertion.valeur * pow(10, 3);
+            }
+            break;
+        }
+        case 12: //HECTO_TO_CENTI
+        {
+           if (convertion.prefixe == 1 && dest == 5)
+            {
+                convert = convertion.valeur * pow(10, 4);
+            }
+            break;
+        }
+        case 13: //HECTO_TO_MILLI
+        {
+            if (convertion.prefixe == 1 && dest == 6)
+            {
+                convert = convertion.valeur * pow(10, 5);
+            }
+            break;
+        }
+        
+        //-------------situation DECA
+        case 14: //DECA_TO_KILO
+        {
+            if (convertion.prefixe == 2 && dest == 0)
+            {
+                convert = convertion.valeur * pow(10, -2);
+            }
+            break;
+        }
+        case 15: //DECA_TO_HECTO
+        {
+            if (convertion.prefixe == 2 && dest == 1)
+            {
+                convert = convertion.valeur * pow(10, -1);
+            }
+            break;
+        }
+        case 16: //DECA_TO_DECA
+        {
+            if (convertion.prefixe == 2 && dest == 2)
+            {
+                convert = convertion.valeur * pow(10, 0);
+            }
+            break;
+        }
+        case 17: //DECA_TO_BASE
+        {
+            if (convertion.prefixe == 2 && dest == 3)
+            {
+                convert = convertion.valeur * pow(10, 1);
+            }
+            break;
+        }
+        case 18: //DECA_TO_DECI
+        {
+           if (convertion.prefixe == 2 && dest == 4)
+            {
+                convert = convertion.valeur * pow(10, 2);
+            }
+            break;
+        }
+        case 19: //DECA_TO_CENTI
+        {
+           if (convertion.prefixe == 2 && dest == 5)
+            {
+                convert = convertion.valeur * pow(10, 3);
+            }
+            break;
+        }
+        case 20: //DECA_TO_MILLI
+        {
+            if (convertion.prefixe == 2 && dest == 6)
+            {
+                convert = convertion.valeur * pow(10, 4);
+            }
+            break;
+        }
+       
+        //-------------situation BASE
+        case 21: //BASE_TO_KILO
+        {
+            if (convertion.prefixe == 3 && dest == 0)
+            {
+                convert = convertion.valeur * pow(10, -3);
+            }
+            break;
+        }
+        case 22: //BASE_TO_HECTO
+        {
+            if (convertion.prefixe == 3 && dest == 1)
+            {
+                convert = convertion.valeur * pow(10, -2);
+            }
+            break;
+        }
+        case 23: //BASE_TO_DECA
+        {
+            if (convertion.prefixe == 3 && dest == 2)
+            {
+                convert = convertion.valeur * pow(10, -1);
+            }
+            break;
+        }
+        case 24: //BASE_TO_BASE
+        {
+            if (convertion.prefixe == 3 && dest == 3)
+            {
+                convert = convertion.valeur * pow(10, 0);
+            }
+            break;
+        }
+        case 25: //BASE_TO_DECI
+        {
+           if (convertion.prefixe == 3 && dest == 4)
+            {
+                convert = convertion.valeur * pow(10, 1);
+            }
+            break;
+        }
+        case 26: //DECA_TO_CENTI
+        {
+           if (convertion.prefixe == 3 && dest == 5)
+            {
+                convert = convertion.valeur * pow(10, 2);
+            }
+            break;
+        }
+        case 27: //BASE_TO_MILLI
+        {
+          if (convertion.prefixe == 3 && dest == 6)
+            {
+                convert = convertion.valeur * pow(10, 3);
+            }
+            break;  
+        }
+        
+        //-------------situation DECI
+        case 28: //DECI_TO_KILO
+        {
+            if (convertion.prefixe == 4 && dest == 0)
+            {
+                convert = convertion.valeur * pow(10, -4);
+            }
+            break;
+        }
+        case 29: //DECI_TO_HECTO
+        {
+            if (convertion.prefixe == 4 && dest == 1)
+            {
+                convert = convertion.valeur * pow(10, -3);
+            }
+            break;
+        }
+        case 30: //DECI_TO_DECA
+        {
+            if (convertion.prefixe == 4 && dest == 2)
+            {
+                convert = convertion.valeur * pow(10, -2);
+            }
+            break;
+        }
+        case 31: //DECI_TO_BASE
+        {
+            if (convertion.prefixe == 4 && dest == 3)
+            {
+                convert = convertion.valeur * pow(10, -1);
+            }
+            break;
+        }
+        case 32: //DECI_TO_DECI
+        {
+           if (convertion.prefixe == 4 && dest == 4)
+            {
+                convert = convertion.valeur * pow(10, 0);
+            }
+            break;
+        }
+        case 33: //DECI_TO_CENTI
+        {
+           if (convertion.prefixe == 4 && dest == 5)
+            {
+                convert = convertion.valeur * pow(10, 1);
+            }
+            break;
+        }
+        case 34: //DECI_TO_MILLI
+        {
+          if (convertion.prefixe == 4 && dest == 6)
+            {
+                convert = convertion.valeur * pow(10, 2);
+            }
+            break;  
+        }
+        
+        //-------------situation CENTI
+        case 35: //CENTI_TO_KILO
+        {
+            if (convertion.prefixe == 5 && dest == 0)
+            {
+                convert = convertion.valeur * pow(10, -5);
+            }
+            break;
+        }
+        case 36: //CENTI_TO_HECTO
+        {
+            if (convertion.prefixe == 5 && dest == 1)
+            {
+                convert = convertion.valeur * pow(10, -4);
+            }
+            break;
+        }
+        case 37: //CENTI_TO_DECA
+        {
+            if (convertion.prefixe == 5 && dest == 2)
+            {
+                convert = convertion.valeur * pow(10, -3);
+            }
+            break;
+        }
+        case 38: //CENTI_TO_BASE
+        {
+            if (convertion.prefixe == 5 && dest == 3)
+            {
+                convert = convertion.valeur * pow(10, -2);
+            }
+            break;
+        }
+        case 39: //CENTI_TO_DECI
+        {
+           if (convertion.prefixe == 5 && dest == 4)
+            {
+                convert = convertion.valeur * pow(10, -1);
+            }
+            break;
+        }
+        case 40: //CENTI_TO_CENTI
+        {
+           if (convertion.prefixe == 5 && dest == 5)
+            {
+                convert = convertion.valeur * pow(10, 0);
+            }
+            break;
+        }
+        case 41: //CENTI_TO_MILLI
+        {
+          if (convertion.prefixe == 5 && dest == 6)
+            {
+                convert = convertion.valeur * pow(10, 1);
+            }
+            break;  
+        }
+        
+        //-------------situation MILLI
+        case 42: //MILLI_TO_KILO
+        {
+            if (convertion.prefixe == 6 && dest == 0)
+            {
+                convert = convertion.valeur * pow(10, -6);
+            }
+            break;
+        }
+        case 43: //MILLI_TO_HECTO
+        {
+            if (convertion.prefixe == 6 && dest == 1)
+            {
+                convert = convertion.valeur * pow(10, -5);
+            }
+            break;
+        }
+        case 44: //MILLI_TO_DECA
+        {
+            if (convertion.prefixe == 6 && dest == 2)
+            {
+                convert = convertion.valeur * pow(10, -4);
+            }
+            break;
+        }
+        case 45: //MILLI_TO_BASE
+        {
+            if (convertion.prefixe == 6 && dest == 3)
+            {
+                convert = convertion.valeur * pow(10, -3);
+            }
+            break;
+        }
+        case 46: //MILLI_TO_DECI
+        {
+           if (convertion.prefixe == 6 && dest == 4)
+            {
+                convert = convertion.valeur * pow(10, -2);
+            }
+            break;
+        }
+        case 47: //MILLI_TO_CENTI
+        {
+           if (convertion.prefixe == 6 && dest == 5)
+            {
+                convert = convertion.valeur * pow(10, -1);
+            }
+            break;
+        }
+        case 48: //MILLI_TO_MILLI
+        {
+          if (convertion.prefixe == 6 && dest == 6)
+            {
+                convert = convertion.valeur * pow(10, 0);
+            }
+            break;  
+        }
+        
+    }	
+     return convert;
 }
+
+/*CONVERSION DES TYPES DE BASE VERS DES TYPES SPECIAUX*/
+
+//----------CAS DE LA DISTANCE
+double meter_to_miles(CONVERTION &convertion)
+{
+    if(convertion.prefixe != 10)
+    {
+        
+    }
+}
+double miles_to_meteer(CONVERTION &convertion);

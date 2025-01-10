@@ -32,7 +32,7 @@ double Basic_convert(CONVERTION &convertion, int source, int dest, int situation
 
 //----------CAS DE LA DISTANCE
 double meter_to_miles(CONVERTION &convertion);
-double miles_to_meteer(CONVERTION &convertion);
+double miles_to_meter(CONVERTION &convertion);
 
 //---------CAS DES LITRES
 #endif

@@ -105,7 +105,7 @@ void modifORuse (MESURE * messure,int &num_messures)
   }
   if (a == 3) main_menu(messure,num_messures);
   else if(a == 2) display_messures(messure,num_messures);
-  else if(a == 1) /////////////////
+  else if(a == 1) ///////////////// 
   else modif_mesure(messure,num_messures);
 }
 
@@ -151,7 +151,71 @@ void modif_mesure(MESURE * messure,int &num_messures)
   }
   if(a == num_messures + 1) main_menu(messure,num_messures);
   else if(a == num_messures) modifORuse (messure,num_messures);
-  
+  else modif_mech(messure,a,num_messures);
+  main_menu(messure,num_messures);
 }
 
+void modif_mech(MESURE * messure,int modif,int &num_messures)
+{
+  system("cls");
+  int b = 0;
+  char answer = n;
+  char inter_nature[30];
+  char inter_type[30];
+  bool nature_modif = false,type_modif = false;
+  cout << "Do you want to change the nature name ? (y/n)" << endl;
+  cin << answer;
+  while (answer != 'y' && answer != 'n') 
+  {
+    cout << "Enter 'y' for yes and 'n' for no" << endl;
+    cin << answer;
+  }
+  if(answer == 'y') 
+  {
+    nature_modif = true;
+    cout << "Enter new nature name" << endl;
+    cin.getline(inter_nature,30);
+  }
+  cout << "Do you want to change the type name ? (y/n)"  << endl;
+  cin << answer;
+  while (answer != 'y' && answer != 'n') 
+  {
+    cout << "Enter 'y' for yes and 'n' for no" << endl;
+    cin << answer;
+  }
+  if(answer == 'y') 
+  {
+    type_modif = true;
+    cout << "Enter new nature name" << endl;
+    cin.getline(inter_type,30);
+  }
+  while (true)
+  {
+    system("cls");
+    if(b == 0) cout << "\033[31m" << "SAVE" << "\033[37m" << "  " << "edit" << "  " << "back" << endl;
+    else if(b == 1) cout << "save" << "  " << "\033[31m" << "EDIT" << "\033[37m" << "  " << "back" << endl;
+    else cout << "save" << "  " << "edit" << "  " << "\033[31m" << "BACK" << "\033[37m" << endl;
+    if(GetAsyncKeyState(0x25))
+    {
+      if(b == 0) b = 2;
+      else if(b == 1) b = 0;
+      else b = 1;
+    }
+    if(GetAsyncKeyState(0x27))
+    {
+      if(b == 0) b = 1;
+      else if (b == 1) b = 2;
+      else b = 0;
+    }
+    if(GetAsyncKeyState(0x0D)) break;
+    Sleep(100);
+  }
+  if(b == 0) 
+  {
+    if(nature_modif) messure[modif].nature = inter_nature;
+    if(type_modif) messure[modif].type = inter_type;
+  }
+  else if(b == 1) modif_mech(messure,modif);
+  else modif_mesure(messure,num_messures);
+}
 

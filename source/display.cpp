@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string.h>
-#include "../header/menu_sys.h"
+#include "../header/display.h"
 #include <windows.h>
 using namespace std;
 
@@ -44,7 +44,7 @@ void main_menu(MESURE * messure,int &num_messures)
     Sleep(100);
   }
   if (a == 0) display_messures(messure,num_messures);
-  else if (a == 1) add_mesure(messure,num_messures);
+  else if (a == 1) /////////////////////////////
 }
 
 void display_messures(MESURE * messure,int &num_messures)
@@ -118,7 +118,6 @@ void add_mesure(MESURE * messure,int &num_messures)
   cout << "Enter the type" << endl;
   cin.getline(messure[num_messures].type,30);
   num_messures++;
-  main_menu(MESURE * messure,int &num_messures);
 }
 
 

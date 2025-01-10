@@ -28,8 +28,17 @@ void main_menu()
     if(GetAsyncKeyState(0X0D))  break;
     Sleep(100);
   }
-  if(a == 0) // hello
-  else if (a == 1) // hello
+  if (a == 0) cout << "  ";
+  else if (a == 1) cout << " ";
 }
+
+// int display_messures(MESURE * messure,int num_messures)
+// {
+//   int a;
+//   for (int i = 0; i < num_messures; i++)
+//   {
+//     if(a == i) 
+//   }
+// }
 
 

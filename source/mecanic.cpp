@@ -422,11 +422,110 @@ double Basic_convert(CONVERTION &convertion, int source, int dest, int situation
 /*CONVERSION DES TYPES DE BASE VERS DES TYPES SPECIAUX*/
 
 //----------CAS DE LA DISTANCE
-double meter_to_miles(CONVERTION &convertion)
+double meter_to_miles(CONVERTION &convertion, int source)
 {
-    if(convertion.prefixe != 10)
+    double convert = 0.0;
+    switch(source)
     {
-        
+        case 0: //KILOMETER_TO_MILES
+        {
+            convert = Basic_convert(convertion, 0, 3, 3);
+            convert = convert /1609.34;
+            break;
+        }
+        case 1: //HECTOMETER_TO_MILES
+        {
+            convert = Basic_convert(convertion, 1, 3, 10);
+            convert = convert /1609.34;
+            break;
+        }
+        case 2: //DECAMETER_TO_MILES    
+        {
+            convert = Basic_convert(convertion, 2, 3, 17);
+            convert = convert /1609.34;
+            break;
+        }
+        case 3: //METER_TO_MILES
+        {
+            convert = Basic_convert(convertion, 3, 3, 24);
+            convert = convert /1609.34;
+            break;
+        }
+        case 4: //DECIMETER_TO_MILES
+        {
+            convert = Basic_convert(convertion, 4, 3, 31);
+            convert = convert /1609.34;
+            break;
+        }
+        case 5: //CENTIMETER_TO_MILES
+        {
+            convert = Basic_convert(convertion, 5, 3, 38);
+            convert = convert /1609.34;
+            break;
+        }
+        case 6: //MILLIMETER_TO_MILES
+        {
+            convert = Basic_convert(convertion, 6, 3, 45);
+            convert = convert /1609.34;
+            break;
+        }
     }
+    return convert;
 }
-double miles_to_meteer(CONVERTION &convertion);
+double miles_to_meter(CONVERTION &convertion, int dest, double valeur)
+{
+    double convert = 0.0;
+    switch(dest)
+    {
+        case 0: //MILES_TO_KILOMETER
+        {
+            convert = valeur *1609.34
+            convertion.valeur = convert;
+            convert = (convertion, 3, 0, 21);
+            break;
+        }
+        case 1: //MILES_TO_HECTOMETER
+        {
+            convert = valeur *1609.34
+            convertion.valeur = convert;
+            convert = (convertion, 3, 1, 22);
+            break;
+        }
+        case 2: //MILES_TO_DECAMETER   
+        {
+            convert = valeur *1609.34
+            convertion.valeur = convert;
+            convert = (convertion, 3, 2, 23);
+            break;
+        }
+        case 3: //MILES_TO_METER
+        {
+            convert = valeur *1609.34
+            convertion.valeur = convert;
+            convert = (convertion, 3, 3, 24);
+            break;
+        }
+        case 4: //MILES_TO_DECIMETER
+        {
+            convert = valeur *1609.34
+            convertion.valeur = convert;
+            convert = (convertion, 3, 4, 25);
+            break;
+        }
+        case 5: //MILES_TO_CENTIMETER
+        {
+            convert = valeur *1609.34
+            convertion.valeur = convert;
+            convert = (convertion, 3, 5, 26);
+            break;
+        }
+        case 6: //MILES_TO_MILLIMETER
+        {
+            convert = valeur *1609.34
+            convertion.valeur = convert;
+            convert = (convertion, 3, 6, 27);
+            break;
+        }
+    }
+    return convert;  
+}

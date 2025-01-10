@@ -31,8 +31,8 @@ double Basic_convert(CONVERTION &convertion, int source, int dest, int situation
 /*CONVERSION DES TYPES DE BASE VERS DES TYPES SPECIAUX*/
 
 //----------CAS DE LA DISTANCE
-double meter_to_miles(CONVERTION &convertion);
-double miles_to_meter(CONVERTION &convertion);
-
-//---------CAS DES LITRES
+<<<<<<< HEAD
+double meter_to_miles(CONVERTION &convertion, int source);
+double miles_to_meter(CONVERTION &convertion, int dest, double valeur);
+//---------CAS DES MASSES
 #endif

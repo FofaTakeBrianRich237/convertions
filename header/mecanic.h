@@ -3,26 +3,13 @@
 
 enum PREFIX
 {
-	YOTTA=0,
-	ZETTA,
-	EXA,
-	PETA,
-	TERA,
-	GIGA,
-	MEGA,
-	KILO,
+	KILO=0,
 	HECTO,
 	DECA,
+	BASE,
 	DECI,
 	CENTI,
-	MILLI,
-	MICRO,
-	NANO,
-	PICO,
-	FEMTO,
-	ATTO,
-	ZEPTO,
-	YOCTO
+	MILLI
 };
 
 typedef struct
@@ -33,10 +20,19 @@ typedef struct
 
 typedef struct
 {
+	double valeur;
 	MESURE mesure;
 	PREFIX prefixe;
 }CONVERTION;
 
-void Basic_convert(CONVERTION &convertion);
+/*POUR LES CONVERSOINS DE TYPES BASIQUE*/
+double Basic_convert(CONVERTION &convertion, int source, int dest, int situation);
 
+/*CONVERSION DES TYPES DE BASE VERS DES TYPES SPECIAUX*/
+
+//----------CAS DE LA DISTANCE
+double meter_to_miles(CONVERTION &convertion);
+double miles_to_meteer(CONVERTION &convertion);
+
+//---------CAS DES LITRES
 #endif

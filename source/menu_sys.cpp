@@ -21,34 +21,44 @@ void upper_case(std::string word)
 }
 
 
-void main_menu_simple(MESURE * messure,int &num_messures)
+void main_menu(MESURE * messure,int &num_messures)
 {
   system("cls");
   int  a = 0;
   while(true)
   {
     system("cls");
-    if(a == 0)  cout << "\033[31m" << "MESSURES" << "\033[37m" << endl << "add a messure" << endl << "exit" << endl;
-    else if(a == 1) cout << "messures" << endl << "\033[31m" << "ADD A MESSURE" <<  "\033[37m" << endl <<  "exit" << endl; 
-    else cout << "messures"  << endl << "add a convertion" << endl << "\033[31m" << "EXIT" << "\033[37m" << endl;
+    if(a == 0)  cout << "\033[31m" << "SIMPLE MESSURES" << "\033[37m" << endl << "special messures" << endl<< "add a messure" << endl << "exit" << endl;
+    else if(a == 2) cout << "simple messures" << endl << "special messueres" << endl << "\033[31m" << "ADD A MESSURE" <<  "\033[37m" << endl <<  "exit" << endl; 
+    else if(a == 1) cout << "simple messures" << endl << "\033[31m" << "SPCECIAL MESSURES" << "\033[37m" << endl << "add a messure" << endl << "exist" << endl;
+    else cout << "simple messures"  << endl << "special messures" << endl << "add a convertion" << endl << "\033[31m" << "EXIT" << "\033[37m" << endl;
     if(GetAsyncKeyState(0x26))  
     {
-      if(a == 0) a = 2;
+      if(a == 0) a = 3;
       else if (a == 1) a = 0;
-      else a = 1;
+      else if(a == 2) a = 1;
+      else a = 2;
     }
     if(GetAsyncKeyState(0x28))  
     { 
       if(a == 0) a = 1;
       else if (a == 1) a = 2;
+      else if(a == 2) a = 3;
       else a = 0;
     }
     if(GetAsyncKeyState(0X0D))  break;
     Sleep(100);
   }
   if (a == 0) display_messures_simple(messure,num_messures);
-  else if (a == 1) add_mesure_simple(messure,num_messures);
+  else if (a == 1) ////////////////////////////////////
+  else if (a == 2) add_mesure(messure,num_messures);
 }
+
+void add_mesure(messure,num_messures)
+{
+  /////////////////////////////////////////////////////////////////////////
+}
+
 
 void display_messures_simple(MESURE * messure,int &num_messures)
 {
@@ -81,9 +91,9 @@ void display_messures_simple(MESURE * messure,int &num_messures)
   else modifORuse_simple (messure,num_messures,messure[a].type);
 }
 
-void modifORuse_simple (MESURE * messure,int &num_messures,char masure[30])
+void modifORuse_simple (MESURE * messure,int &num_messures,char mesure[30])
 {
-  int a = 0,dest 0,source = 0;
+  int a = 0,dest = 0,source = 0;
   PREFIX prefix;
   CONVERTION convertion;
   while(true)
@@ -308,7 +318,6 @@ int sourceTOdest_simple(char mesure[30])
     else if(a == 5) cout << "kilo" << endl << "hecto" << endl << "deca" << endl << mesure << endl << "deci" << endl << "\033[31m" << "CENTI" << "\033[37m" << endl << "milli" << endl;
     else  cout << "kilo" << endl << "hecto" << endl << "deca" << endl << mesure << endl << "deci" << endl << "centi" << endl << "\033[31m" << "MILLI" << "\033[37m" << endl;
   }
-  system{"cls"};
   return a;
 }
 

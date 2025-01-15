@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string.h>
+#include <typeinfo>
 #include "../header/menu_sys.h"
+#include "../header/mecanic.h"
 #include <windows.h>
 using namespace std;
 
@@ -19,8 +21,9 @@ void upper_case(std::string word)
 }
 
 
-void main_menu(MESURE * messure,int &num_messures)
+void main_menu_simple(MESURE * messure,int &num_messures)
 {
+  system("cls");
   int  a = 0;
   while(true)
   {
@@ -43,12 +46,13 @@ void main_menu(MESURE * messure,int &num_messures)
     if(GetAsyncKeyState(0X0D))  break;
     Sleep(100);
   }
-  if (a == 0) display_messures(messure,num_messures);
-  else if (a == 1) add_mesure(messure,num_messures);
+  if (a == 0) display_messures_simple(messure,num_messures);
+  else if (a == 1) add_mesure_simple(messure,num_messures);
 }
 
-void display_messures(MESURE * messure,int &num_messures)
+void display_messures_simple(MESURE * messure,int &num_messures)
 {
+  system("cls");
   int a = 0;
   while (true)
   {
@@ -73,13 +77,15 @@ void display_messures(MESURE * messure,int &num_messures)
     else cout << "back" << endl;
     Sleep(100);
   }
-  if (a == num_messures) main_menu(messure,num_messures);
-  else modifORuse (messure,num_messures);
+  if (a == num_messures) main_menu_simple(messure,num_messures);
+  else modifORuse_simple (messure,num_messures,messure[a].type);
 }
 
-void modifORuse (MESURE * messure,int &num_messures)
+void modifORuse_simple (MESURE * messure,int &num_messures,char masure[30])
 {
-  int a = 0;
+  int a = 0,dest 0,source = 0;
+  PREFIX prefix;
+  CONVERTION convertion;
   while(true)
   {
     system("cls");
@@ -103,13 +109,13 @@ void modifORuse (MESURE * messure,int &num_messures)
     else if(a == 2) cout << "modify" << endl << "use" << endl << "\033[31m" <<"BACK" << "\033[37m" << endl << "back to menu" << endl;
     else cout << "modify" << endl << "use" << endl <<"back"<< endl << "\033[31m" << "BACK TO MENU" << "\033[37m" << endl;
   }
-  if (a == 3) main_menu(messure,num_messures);
-  else if(a == 2) display_messures(messure,num_messures);
-  else if(a == 1) ///////////////// 
-  else modif_mesure(messure,num_messures);
+  if (a == 3) main_menu_simple(messure,num_messures);
+  else if(a == 2) display_messures_simple(messure,num_messures);
+  else if(a == 1) use_convert_simple(convertion,mesure,source,dest,prefix)
+  else modif_mesure_simple(messure,num_messures);
 }
 
-void add_mesure(MESURE * messure,int &num_messures)
+void add_mesure_simple(MESURE * messure,int &num_messures)
 {
   system("cls");
   int a = 0;
@@ -121,7 +127,7 @@ void add_mesure(MESURE * messure,int &num_messures)
   main_menu(MESURE * messure,int &num_messures);
 }
 
-void modif_mesure(MESURE * messure,int &num_messures)
+void modif_mesure_simple(MESURE * messure,int &num_messures)
 {
   int a = 0;
   while (true)
@@ -149,13 +155,13 @@ void modif_mesure(MESURE * messure,int &num_messures)
     else cout << "back" << endl << "back to menu" << endl;
     Sleep(100);
   }
-  if(a == num_messures + 1) main_menu(messure,num_messures);
-  else if(a == num_messures) modifORuse (messure,num_messures);
-  else modif_mech(messure,a,num_messures);
-  main_menu(messure,num_messures);
+  if(a == num_messures + 1) main_menu_simple (messure,num_messures);
+  else if(a == num_messures) modifORuse_simple (messure,num_messures);
+  else modif_mech_simple(messure,a,num_messures);
+  main_menu_simple(messure,num_messures);
 }
 
-void modif_mech(MESURE * messure,int modif,int &num_messures)
+void modif_mech_simple(MESURE * messure,int modif,int &num_messures)
 {
   system("cls");
   int b = 0;
@@ -215,7 +221,95 @@ void modif_mech(MESURE * messure,int modif,int &num_messures)
     if(nature_modif) messure[modif].nature = inter_nature;
     if(type_modif) messure[modif].type = inter_type;
   }
-  else if(b == 1) modif_mech(messure,modif);
-  else modif_mesure(messure,num_messures);
+  else if(b == 1) modif_mech_simple(messure,modif);
+  else modif_mesure_simple(messure,num_messures);
 }
 
+void use_convert_simple(CONVERTION &convertion,char mesure[30],int & source,int & dest,PREFIX prefix)
+{
+  system("cls");
+  int value = 0,c = 0;
+  char valeur[100];
+  string source_name;
+  string dest_name;
+  bool valid = false;
+  void select_units_simple(mesure,source,dest); 
+  while(!valid)
+  {
+    if(c != 0) cout << "Invalid value" << endl;
+    cout << "Enter the value" << endl;
+
+    cin.getline(valeur,100);
+    for(int i = 0; valeur[i] != '\0'; i++)
+    {
+      if(valeur[i] >= 'A' && valeur[i] <= 'z')
+      {
+        valid = false;
+        break;
+      }
+      else valid = true;
+    }
+    if(c == 0) c = 1;
+  }
+
+  value = (int)valeur;
+  source_dest_name(mesure,source_name,source);
+  source_dest_name(mesure,dest_name,source);
+  
+  cout << "Convertion made" << endl << endl;
+  if(source !=3 && dest != 3) cout << value << source_name << " " << mesure << " " << "is equal to " << Basic_convert(convertion,source, dest,situation_simple(source,dest)) << " " << dest_name << " " << mesure << endl;
+  else if(source == 3 && dest != 3) cout << value << " " << mesure << " " << "is equal to " << Basic_convert(convertion,source, dest,situation_simple(source,dest)) << " " << dest_name << " " << mesure << endl;
+  else if(source != 3 && dest == 3) cout << value << source_name << " " << mesure << " " << "is equal to " << Basic_convert(convertion,source, dest,situation_simple(source,dest)) << " " << mesure << endl;
+  else cout << value << " " << mesure << " " << "is equal to " << Basic_convert(convertion,source, dest,situation_simple(source,dest)) << " " << mesure << endl;
+}
+
+void source_dest_name(char mesure[30],string &name,int source_dest_value)
+{
+  if (source_dest_value == 0) name = "kilo";
+  else if (source_dest_value == 0) name = "Hecto";
+  else if (source_dest_value == 0) name = "Deca";
+  else if (source_dest_value == 0) name = mesure;
+  else if (source_dest_value == 0) name = "Centi";
+  else if (source_dest_value == 0) name = "Deci";
+  else name = "Milli";
+}
+
+void select_units_simple(char mesure[30],int & source,int & dest)
+{
+  cout << "Select initial unit" << endl;
+  source = sourceTOdest_simple(mesure);
+  cout << "Select final unit" << endl;
+  dest = sourceTOdest_simple(mesure);
+}
+
+int sourceTOdest_simple(char mesure[30])
+{
+  system("cls");
+  int a = 0;
+  while{true}
+  {
+    if(GetAsyncKeyState(0x26)) 
+    {
+      if(a == 0) a = 6;
+      else a -= 1;
+    }
+    if(GetAsyncKeyState(0x28)) 
+    {
+      if(a == 6) a == 0;
+      else a += 1;
+    }
+    if(GetAsyncKeyState(0x0D)) break;
+
+    if(a == 0) cout << "\033[31m" << "KILO" << "\033[37m" << endl << "hecto" << endl << "deca" << endl << mesure << endl << "deci" << endl << "centi" << endl << "milli" << endl;
+    else if (a == 1) cout << "kilo" << endl << "\033[31m" << "HECTO" << "\033[37m" << endl << "deca" << endl << mesure << endl << "deci" << endl << "centi" << endl << "milli" << endl;
+    else if(a == 2) cout << "kilo" << endl << "hecto" << endl << "\033[31m" << "DECA" << "\033[37m" << endl << mesure << endl << "deci" << endl << "centi" << endl << "milli" << endl;
+    else if (a == 3) cout << "kilo" << endl << "hecto" << endl << "deca" << endl << upper_case(mesure) << endl << "deci" << endl << "centi" << endl << "milli" << endl;
+    else if(a == 4) cout << "kilo" << endl << "hecto" << endl << "deca" << endl << mesure << endl <<  "\033[31m" << "DECI" << "\033[37m" << endl << "centi" << endl << "milli" << endl;
+    else if(a == 5) cout << "kilo" << endl << "hecto" << endl << "deca" << endl << mesure << endl << "deci" << endl << "\033[31m" << "CENTI" << "\033[37m" << endl << "milli" << endl;
+    else  cout << "kilo" << endl << "hecto" << endl << "deca" << endl << mesure << endl << "deci" << endl << "centi" << endl << "\033[31m" << "MILLI" << "\033[37m" << endl;
+  }
+  system{"cls"};
+  return a;
+}
+
+int situation_simple(int source,int dest);

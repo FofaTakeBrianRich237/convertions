@@ -54,10 +54,7 @@ void main_menu(MESURE * messure,int &num_messures)
   else if (a == 2) add_mesure(messure,num_messures);
 }
 
-void add_mesure(messure,num_messures)
-{
-  /////////////////////////////////////////////////////////////////////////simple + special
-}
+//void add_mesure(messure,num_messures)simple + special
 
 
 void display_messures_simple(MESURE * messure,int &num_messures)
@@ -184,7 +181,7 @@ void modif_mech_simple(MESURE * messure,int modif,int &num_messures)
   while (answer != 'y' && answer != 'n') 
   {
     cout << "Enter 'y' for yes and 'n' for no" << endl;
-    cin << answer;
+    cin >> answer;
   }
   if(answer == 'y') 
   {
@@ -193,11 +190,11 @@ void modif_mech_simple(MESURE * messure,int modif,int &num_messures)
     cin.getline(inter_nature,30);
   }
   cout << "Do you want to change the type name ? (y/n)"  << endl;
-  cin << answer;
+  cin >> answer;
   while (answer != 'y' && answer != 'n') 
   {
     cout << "Enter 'y' for yes and 'n' for no" << endl;
-    cin << answer;
+    cin >> answer;
   }
   if(answer == 'y') 
   {
@@ -231,7 +228,7 @@ void modif_mech_simple(MESURE * messure,int modif,int &num_messures)
     if(nature_modif) messure[modif].nature = inter_nature;
     if(type_modif) messure[modif].type = inter_type;
   }
-  else if(b == 1) modif_mech_simple(messure,modif);
+  else if(b == 1) modif_mech_simple(messure,modif,num_messures);
   else modif_mesure_simple(messure,num_messures);
 }
 
@@ -243,7 +240,7 @@ void use_convert_simple(CONVERTION &convertion,char mesure[30],int & source,int 
   string source_name;
   string dest_name;
   bool valid = false;
-  void select_units_simple(mesure,source,dest); 
+  select_units_simple(mesure,source,dest); 
   while(!valid)
   {
     if(c != 0) cout << "Invalid value" << endl;
@@ -321,4 +318,3 @@ int sourceTOdest_simple(char mesure[30])
   return a;
 }
 
-int situation_simple(int source,int dest);

@@ -8,7 +8,7 @@ using namespace std;
 
 //\033[31m" << "1 VS 1" << "\033[37m"  
 
-void upper_case(std::string word)
+void upper_case(char word[30])
 {
     for(int i = 0; word[i] != '\0'; i++)
     {
@@ -56,7 +56,7 @@ void main_menu(MESURE * messure,int &num_messures)
 
 void add_mesure(messure,num_messures)
 {
-  /////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////simple + special
 }
 
 

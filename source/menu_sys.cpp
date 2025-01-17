@@ -266,13 +266,59 @@ void use_convert_simple(CONVERTION &convertion,char mesure[30],int & source,int 
 
 void source_dest_name(char mesure[30],char name[10],int source_dest_value)
 {
-  if (source_dest_value == 0) name = "kilo";
-  else if (source_dest_value == 0) name = "Hecto";
-  else if (source_dest_value == 0) name = "Deca";
+  if (source_dest_value == 0) 
+  [
+    name[0] = 'K';
+    name[1] = 'i';
+    name[2] = 'l';
+    name[3] = 'o';
+    name[4] = '\0';
+  ]
+  else if (source_dest_value == 0) 
+  {
+    name[0] = 'H';
+    name[1] = 'e';
+    name[2] = 'c';
+    name[3] = 't';
+    name[4] = 'o';
+    name[5] = '\0';
+
+  }
+  else if (source_dest_value == 0) 
+  {
+    name[0] = 'D';
+    name[1] = 'e';
+    name[2] = 'c';
+    name[3] = 'a';
+    name[4] = '\0';
+  }
   else if (source_dest_value == 0) name = mesure;
-  else if (source_dest_value == 0) name = "Centi";
-  else if (source_dest_value == 0) name = "Deci";
-  else name = "Milli";
+  else if (source_dest_value == 0) 
+  {
+    name[0] = 'C';
+    name[1] = 'e';
+    name[2] = 'n';
+    name[3] = 't';
+    name[4] = 'i';
+    name[5] = '\0';
+  }
+  else if (source_dest_value == 0) 
+  {
+    name[0] = 'D';
+    name[1] = 'e';
+    name[2] = 'c';
+    name[3] = 't';
+    name[4] = '\0';
+  }
+  else 
+  {
+    name[0] = 'M';
+    name[1] = 'i';
+    name[2] = 'l';
+    name[3] = 'l';
+    name[4] = 'i';
+    name[5] = '\0';
+  }
 }
 
 void select_units_simple(char mesure[30],int & source,int & dest)

@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/LOUIS_NDJIE/Desktop/convertions",
-      "program": "c:/Users/LOUIS_NDJIE/Desktop/convertions/build/Debug/outDebug",
+      "cwd": "c:/Users/LOUIS_NDJIE/Desktop/convertions/source",
+      "program": "c:/Users/LOUIS_NDJIE/Desktop/convertions/source/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

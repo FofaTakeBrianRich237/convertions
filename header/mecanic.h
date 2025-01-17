@@ -33,5 +33,13 @@ double Basic_convert(CONVERTION &convertion, int source, int dest, int situation
 //----------CAS DE LA DISTANCE
 double meter_to_miles(CONVERTION &convertion, int source);
 double miles_to_meter(CONVERTION &convertion, int dest, double valeur);
+
 //---------CAS DES MASSES
+double gramme_to_livre(CONVERSION &convertion, int source);
+double livre_to_gramme(CONVERSION &convertion, int dest, double valeur);
+
+//----------CAS DES LITRES
+double litre_to_gallon(CONVERSION &convertion, int source);
+double gallon_to_litre(CONVERTION &convertion, int dest, double valeur);
+
 #endif

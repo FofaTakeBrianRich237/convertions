@@ -531,7 +531,7 @@ double miles_to_meter(CONVERTION &convertion, int dest, double valeur)
 }
 
 //---------CAS DES MASSES
-double gramme_to_livre(CONVERSION &convertion, int source)
+double gramme_to_livre(CONVERTION &convertion, int source)
 {
     double convert = 0.0;
     switch(source)
@@ -583,7 +583,7 @@ double gramme_to_livre(CONVERSION &convertion, int source)
 
 }
 
-double livre_to_gramme(CONVERSION &convertion, int dest, double valeur)
+double livre_to_gramme(CONVERTION &convertion, int dest, double valeur)
 {
     double convert = 0.0;
     switch(dest)
@@ -642,7 +642,7 @@ double livre_to_gramme(CONVERSION &convertion, int dest, double valeur)
 }
 
 //----------CAS DES LITRES
-double litre_to_gallon(CONVERSION &convertion, int source)
+double litre_to_gallon(CONVERTION &convertion, int source)
 {
     double convert = 0.0;
     switch(source)

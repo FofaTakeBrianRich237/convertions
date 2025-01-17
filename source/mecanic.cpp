@@ -479,49 +479,271 @@ double miles_to_meter(CONVERTION &convertion, int dest, double valeur)
     {
         case 0: //MILES_TO_KILOMETER
         {
-            convert = valeur *1609.34
+            convert = valeur *1609.34;
             convertion.valeur = convert;
             convert = (convertion, 3, 0, 21);
             break;
         }
         case 1: //MILES_TO_HECTOMETER
         {
-            convert = valeur *1609.34
+            convert = valeur *1609.34;
             convertion.valeur = convert;
             convert = (convertion, 3, 1, 22);
             break;
         }
         case 2: //MILES_TO_DECAMETER   
         {
-            convert = valeur *1609.34
+            convert = valeur *1609.34;
             convertion.valeur = convert;
             convert = (convertion, 3, 2, 23);
             break;
         }
         case 3: //MILES_TO_METER
         {
-            convert = valeur *1609.34
+            convert = valeur *1609.34;
             convertion.valeur = convert;
             convert = (convertion, 3, 3, 24);
             break;
         }
         case 4: //MILES_TO_DECIMETER
         {
-            convert = valeur *1609.34
+            convert = valeur *1609.34;
             convertion.valeur = convert;
             convert = (convertion, 3, 4, 25);
             break;
         }
         case 5: //MILES_TO_CENTIMETER
         {
-            convert = valeur *1609.34
+            convert = valeur *1609.34;
             convertion.valeur = convert;
             convert = (convertion, 3, 5, 26);
             break;
         }
         case 6: //MILES_TO_MILLIMETER
         {
-            convert = valeur *1609.34
+            convert = valeur *1609.34;
+            convertion.valeur = convert;
+            convert = (convertion, 3, 6, 27);
+            break;
+        }
+    }
+    return convert;  
+}
+
+//---------CAS DES MASSES
+double gramme_to_livre(CONVERSION &convertion, int source)
+{
+    double convert = 0.0;
+    switch(source)
+    {
+        case 0: //KILOGRAMME_TO_LIVRE
+        {
+            convert = Basic_convert(convertion, 0, 3, 3);
+            convert = convert /453.592;
+            break;
+        }
+        case 1: //HECTOGRAMME_TO_LIVRE
+        {
+            convert = Basic_convert(convertion, 1, 3, 10);
+            convert = convert /453.592;
+            break;
+        }
+        case 2: //DECAGRAMME_TO_LIVRE    
+        {
+            convert = Basic_convert(convertion, 2, 3, 17);
+            convert = convert /453.592;
+            break;
+        }
+        case 3: //GRAMME_TO_LIVRE
+        {
+            convert = Basic_convert(convertion, 3, 3, 24);
+            convert = convert /453.592;
+            break;
+        }
+        case 4: //DECIGRAMME_TO_LIVRE
+        {
+            convert = Basic_convert(convertion, 4, 3, 31);
+            convert = convert /453.592;
+            break;
+        }
+        case 5: //CENTIGRAMME_TO_LIVRE
+        {
+            convert = Basic_convert(convertion, 5, 3, 38);
+            convert = convert /453.592;
+            break;
+        }
+        case 6: //MILLIGRAMME_TO_LIVRE
+        {
+            convert = Basic_convert(convertion, 6, 3, 45);
+            convert = convert /453.592;
+            break;
+        }
+    }
+    return convert;
+
+}
+
+double livre_to_gramme(CONVERSION &convertion, int dest, double valeur)
+{
+    double convert = 0.0;
+    switch(dest)
+    {
+        case 0: //LIVRE_TO_KILOGRAMME
+        {
+            convert = valeur * 453.592;
+            convertion.valeur = convert;
+            convert = (convertion, 3, 0, 21);
+            break;
+        }
+        case 1: //LIVRE_TO_HECTOGRAMME
+        {
+            convert = valeur * 453.592;
+            convertion.valeur = convert;
+            convert = (convertion, 3, 1, 22);
+            break;
+        }
+        case 2: //LIVRE_TO_DECAGRAMME   
+        {
+            convert = valeur * 453.592;
+            convertion.valeur = convert;
+            convert = (convertion, 3, 2, 23);
+            break;
+        }
+        case 3: //LIVRE_TO_GRAMME
+        {
+            convert = valeur * 453.592;
+            convertion.valeur = convert;
+            convert = (convertion, 3, 3, 24);
+            break;
+        }
+        case 4: //LIVRE_TO_DECIGRAMME
+        {
+            convert = valeur * 453.592;
+            convertion.valeur = convert;
+            convert = (convertion, 3, 4, 25);
+            break;
+        }
+        case 5: //LIVRE_TO_CENTIGRAMME
+        {
+            convert = valeur * 453.592;
+            convertion.valeur = convert;
+            convert = (convertion, 3, 5, 26);
+            break;
+        }
+        case 6: //LIVRE_TO_MILLIGRAMME
+        {
+            convert = valeur * 453.592;
+            convertion.valeur = convert;
+            convert = (convertion, 3, 6, 27);
+            break;
+        }
+    }
+    return convert;  
+}
+
+//----------CAS DES LITRES
+double litre_to_gallon(CONVERSION &convertion, int source)
+{
+    double convert = 0.0;
+    switch(source)
+    {
+        case 0: //KILOLITRE_TO_GALLON
+        {
+            convert = Basic_convert(convertion, 0, 3, 3);
+            convert = convert /3.785;
+            break;
+        }
+        case 1: //HECTOLITRE_TO_GALLON
+        {
+            convert = Basic_convert(convertion, 1, 3, 10);
+            convert = convert /3.785;
+            break;
+        }
+        case 2: //DECALITRE_TO_GALLON    
+        {
+            convert = Basic_convert(convertion, 2, 3, 17);
+            convert = convert /3.785;
+            break;
+        }
+        case 3: //LITRE_TO_GALLON
+        {
+            convert = Basic_convert(convertion, 3, 3, 24);
+            convert = convert /3.785;
+            break;
+        }
+        case 4: //DECILITRE_TO_GALLON
+        {
+            convert = Basic_convert(convertion, 4, 3, 31);
+            convert = convert /3.785;
+            break;
+        }
+        case 5: //CENTILITRE_TO_GALLON
+        {
+            convert = Basic_convert(convertion, 5, 3, 38);
+            convert = convert /3.785;
+            break;
+        }
+        case 6: //MILLILITRE_TO_GALLON
+        {
+            convert = Basic_convert(convertion, 6, 3, 45);
+            convert = convert /3.785;
+            break;
+        }
+    }
+    return convert;
+
+}
+
+double gallon_to_litre(CONVERTION &convertion, int dest, double valeur)
+{
+     double convert = 0.0;
+    switch(dest)
+    {
+        case 0: //LIVRE_TO_KILOGRAMME
+        {
+            convert = valeur * 3.785;
+            convertion.valeur = convert;
+            convert = (convertion, 3, 0, 21);
+            break;
+        }
+        case 1: //GALLON_TO_HECTOLITRE
+        {
+            convert = valeur * 3.785;
+            convertion.valeur = convert;
+            convert = (convertion, 3, 1, 22);
+            break;
+        }
+        case 2: //GALLON_TO_DECALITRE   
+        {
+            convert = valeur * 3.785;
+            convertion.valeur = convert;
+            convert = (convertion, 3, 2, 23);
+            break;
+        }
+        case 3: //GALLON_TO_LITRE
+        {
+            convert = valeur * 3.785;
+            convertion.valeur = convert;
+            convert = (convertion, 3, 3, 24);
+            break;
+        }
+        case 4: //GALLON_TO_DECILITRE
+        {
+            convert = valeur * 3.785;
+            convertion.valeur = convert;
+            convert = (convertion, 3, 4, 25);
+            break;
+        }
+        case 5: //GALLON_TO_CENTILITRE
+        {
+            convert = valeur * 3.785;
+            convertion.valeur = convert;
+            convert = (convertion, 3, 5, 26);
+            break;
+        }
+        case 6: //GALLON_TO_MILLILITRE
+        {
+            convert = valeur * 3.785;
             convertion.valeur = convert;
             convert = (convertion, 3, 6, 27);
             break;

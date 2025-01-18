@@ -429,12 +429,16 @@ void select_units_simple(char mesure[30],int & source,int & dest)
   dest = sourceTOdest_simple(mesure);
 }
 
+/*
+function for the selcetion of the unit
+*/
 int sourceTOdest_simple(char mesure[30])
 {
   system("cls");
   int a = 0;
   while(true)
   {
+    //------------input colletion
     if(GetAsyncKeyState(0x26)) 
     {
       if(a == 0) a = 6;
@@ -446,7 +450,9 @@ int sourceTOdest_simple(char mesure[30])
       else a += 1;
     }
     if(GetAsyncKeyState(0x0D)) break;
-
+    //-----------
+    
+    //------------display of base unit
     if(a == 0) cout << "\033[31m" << "KILO" << "\033[37m" << endl << "hecto" << endl << "deca" << endl << mesure << endl << "deci" << endl << "centi" << endl << "milli" << endl;
     else if (a == 1) cout << "kilo" << endl << "\033[31m" << "HECTO" << "\033[37m" << endl << "deca" << endl << mesure << endl << "deci" << endl << "centi" << endl << "milli" << endl;
     else if(a == 2) cout << "kilo" << endl << "hecto" << endl << "\033[31m" << "DECA" << "\033[37m" << endl << mesure << endl << "deci" << endl << "centi" << endl << "milli" << endl;
@@ -460,6 +466,8 @@ int sourceTOdest_simple(char mesure[30])
     else if(a == 5) cout << "kilo" << endl << "hecto" << endl << "deca" << endl << mesure << endl << "deci" << endl << "\033[31m" << "CENTI" << "\033[37m" << endl << "milli" << endl;
     else  cout << "kilo" << endl << "hecto" << endl << "deca" << endl << mesure << endl << "deci" << endl << "centi" << endl << "\033[31m" << "MILLI" << "\033[37m" << endl;
   }
-  return a;
+  //-------------   
+
+  return a;//returns the selected unit
 }
 

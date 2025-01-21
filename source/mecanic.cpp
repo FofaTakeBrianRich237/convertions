@@ -5,7 +5,7 @@
 /*POUR LES CONVERSOINS DE TYPES BASIQUE*/
 double Basic_convert(CONVERTION &convertion, int dest)
 {
-    double convert = 0.0ff;
+    double convert = 0.0f;
 
     switch(convertion.prefixe)
     {
@@ -17,41 +17,41 @@ double Basic_convert(CONVERTION &convertion, int dest)
         case 1: //HECTO_TO_ALL
         {
             if((int)(convertion.prefixe) > dest)convert = convertion.valeur * pow(10, (dest*-1));
-            else((int)(convertion.prefixe) == dest)convert = convertion.valeur * pow(10, (0));
-            else((int)(convertion.prefixe) < dest)convert = convertion.valeur * pow(10, (dest));
+            else if((int)(convertion.prefixe) == dest) convert = convertion.valeur * pow(10, (0));
+            else if((int)(convertion.prefixe) < dest) convert = convertion.valeur * pow(10, (dest));
             break;
         }
         case 2: //DECA_TO_ALL
         {
             if((int)(convertion.prefixe) > dest)convert = convertion.valeur * pow(10, (dest*-1));
-            else((int)(convertion.prefixe) == dest)convert = convertion.valeur * pow(10, (0));
-            else((int)(convertion.prefixe) < dest)convert = convertion.valeur * pow(10, (dest));
+            else if((int)(convertion.prefixe) == dest)convert = convertion.valeur * pow(10, (0));
+            else if((int)(convertion.prefixe) < dest)convert = convertion.valeur * pow(10, (dest));
         }
         case 3: //BASE_TO_ALL
         {
             if((int)(convertion.prefixe) > dest)convert = convertion.valeur * pow(10, (dest*-1));
-            else((int)(convertion.prefixe) == dest)convert = convertion.valeur * pow(10, (0));
-            else((int)(convertion.prefixe) < dest)convert = convertion.valeur * pow(10, (dest));
+            else if((int)(convertion.prefixe) == dest)convert = convertion.valeur * pow(10, (0));
+            else if((int)(convertion.prefixe) < dest)convert = convertion.valeur * pow(10, (dest));
             break;
         }
         case 4: //DECI_TO_ALL
         {   
             if((int)(convertion.prefixe) > dest)convert = convertion.valeur * pow(10, (dest*-1));
-            else((int)(convertion.prefixe) == dest)convert = convertion.valeur * pow(10, (0));
-            else((int)(convertion.prefixe) < dest)convert = convertion.valeur * pow(10, (dest));
+            else if((int)(convertion.prefixe) == dest)convert = convertion.valeur * pow(10, (0));
+            else if((int)(convertion.prefixe) < dest)convert = convertion.valeur * pow(10, (dest));
             break;
         }
         case 5: //CENTI_TO_ALL
         {
             if((int)(convertion.prefixe) > dest)convert = convertion.valeur * pow(10, (dest*-1));
-            else((int)(convertion.prefixe) == dest)convert = convertion.valeur * pow(10, (0));
-            else((int)(convertion.prefixe) < dest)convert = convertion.valeur * pow(10, (dest));
+            else if((int)(convertion.prefixe) == dest)convert = convertion.valeur * pow(10, (0));
+            else if((int)(convertion.prefixe) < dest)convert = convertion.valeur * pow(10, (dest));
             break;
         }
         case 6: //MILLI_TO_ALL
         {
             if((int)(convertion.prefixe) > dest)convert = convertion.valeur * pow(10, (dest*-1));
-            else((int)(convertion.prefixe) == dest)convert = convertion.valeur * pow(10, (0));
+            else if((int)(convertion.prefixe) == dest)convert = convertion.valeur * pow(10, (0));
             break;
         }
     }

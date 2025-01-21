@@ -18,13 +18,15 @@ typedef struct
 	char nature[30];
 }MESURE;
 
-typedef struct
+typedef struct // 
 {
+	char con_name[30];
 	char type[30];
 	char nature[30];
 	char intial_unit[10];
     char finial_unit[10];
 	int sign_to_use;
+	double constant;
 }SPECIALMESURE;
 
 typedef struct

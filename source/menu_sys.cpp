@@ -33,30 +33,27 @@ the main menu function
 messure is an array of messures
 num_messures is the number of messures store in messure
 */
-void main_menu(MESURE * messure,int &num_messures)
+void main_menu(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
   system("cls");
   int  a = 0;
   while(true)// display of choices
   {
     system("cls");
-    if(a == 0)  cout << "\033[31m" << "SIMPLE MESSURES" << "\033[37m" << endl << "special messures" << endl<< "add a messure" << endl << "exit" << endl;
-    else if(a == 2) cout << "simple messures" << endl << "special messueres" << endl << "\033[31m" << "ADD A MESSURE" <<  "\033[37m" << endl <<  "exit" << endl; 
-    else if(a == 1) cout << "simple messures" << endl << "\033[31m" << "SPCECIAL MESSURES" << "\033[37m" << endl << "add a messure" << endl << "exist" << endl;
-    else cout << "simple messures"  << endl << "special messures" << endl << "add a convertion" << endl << "\033[31m" << "EXIT" << "\033[37m" << endl;
+    if(a == 0)  cout << "\033[31m" << "MESSURES" << "\033[37m" << endl << "add a messure or convertion" << endl << "exit" << endl;
+    else if(a == 1) cout << "messures" << endl << "\033[31m" << "ADD A MESSURE OR CONVERTION" <<  "\033[37m" << endl <<  "exit" << endl; 
+    else cout << "messures"  <<  endl << "add a messure" << endl << "\033[31m" << "EXIT" << "\033[37m" << endl;
     // -------------- input collection from keyboard
     if(GetAsyncKeyState(0x26))  
     {
-      if(a == 0) a = 3;
+      if(a == 0) a = 2;
       else if (a == 1) a = 0;
-      else if(a == 2) a = 1;
-      else a = 2;
+      else  a = 1;
     }
     if(GetAsyncKeyState(0x28))  
     { 
       if(a == 0) a = 1;
       else if (a == 1) a = 2;
-      else if(a == 2) a = 3;
       else a = 0;
     }
     if(GetAsyncKeyState(0X0D))  break;
@@ -64,19 +61,39 @@ void main_menu(MESURE * messure,int &num_messures)
     Sleep(100);
   }
   //-------------use of function depending on the chioce made
-  if (a == 0) display_messures_simple(messure,num_messures); // to display the different messures store in the messure array
-  //else if (a == 1) 
-  //else if (a == 2) add_mesure(messure,num_messures);
+  if (a == 0) display_messure(messure,num_messures,sp_messure,sp_num_messures); // to display the different messures store in the messure array
+  else if (a == 1) add_mesure(messure,num_messures,sp_messure,sp_num_messures);
 }
 
-//void add_mesure(messure,num_messures)simple + special
 
+void add_mesure(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures)
+{
+  int a = 0;
+  while (true)
+  {
+    system("cls");
+    if(GetAsyncKeystate(0X26) || GetAsynckeystate(0X28))
+    {
+      if(a == 0) a = 1;
+      else a = 0;
+    }
+    if(GetAsyncKeystate(0X0D)) break;
+
+    if(a == 0) cout << "\033[31m" << "ADD A SIMPLE MESSURE" << "\033[37m" << endl << "add a special convetion" << endl;
+    else cout << "add a simple messure" << endl << "\033[31m" << "ADD A SPECIAL CONVERTION" << " \033[37m" << endl;
+    Sleep(100);
+  }
+
+  if(a == 0) add_mesure_simple(messure,num_messures);
+  else add_mesure_special(sp_messure,sp_num_messures);
+  main_menu(messure,num_messures,sp_messure,sp_num_messures);
+}
 
 
 /*
 fucntion to display simple messures convetions
 */
-void display_messures_simple(MESURE * messure,int &num_messures)
+void display_messures_simple(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
   system("cls");
   int a = 0; // use to determine choice
@@ -86,12 +103,12 @@ void display_messures_simple(MESURE * messure,int &num_messures)
     system("cls");
     if(GetAsyncKeyState(0x26))
     {
-      if(a == 0) a = num_messures;
+      if(a == 0) a = num_messures + 1;
       else a -= 1;
     }
     if(GetAsyncKeyState(0x28))
     {
-      if(a == num_messures) a = 0;
+      if(a == num_messures + 1) a = 0;
       else a += 1;
     }
     if(GetAsyncKeyState(0x0D)) break;
@@ -107,15 +124,17 @@ void display_messures_simple(MESURE * messure,int &num_messures)
       }
       else cout << messure[i].nature << endl;
     }
-    if(a == num_messures) cout << "\033[31m" << "BACK" << "\033[37m" << endl;
-    else cout << "back" << endl;
+    if(a == num_messures) cout << "\033[31m" << "BACK" << "\033[37m" << endl << "main menu" << endl;
+    else if (a == num_messures + 1) cout << "back" << endl << "\033[31m" << "MAIN MENU" << "\033[37m" << endl;
+    else cout << "back" << endl << "main menu" << endl; 
     //---------------end of display of selection
     Sleep(100);
   }
 
   //---------function calls depending on choice made
-  if (a == num_messures) main_menu(messure,num_messures);// to return to the main menu
-  else modifORuse_simple (messure,num_messures,messure[a].type);// to modify or use a convertion
+  if (a == num_messures + 1) main_menu(messure,num_messures,sp_messure,sp_num_messures);// to return to the main menu
+  else if(a == num_messures) display_messure(messure,num_messures,sp_messure,sp_messure,sp_num_messures);
+  else modifORuse_simple (messure,num_messures,messure[a].type,sp_messure,sp_num_messures);// to modify or use a convertion
   //----------
 }
 
@@ -124,7 +143,7 @@ void display_messures_simple(MESURE * messure,int &num_messures)
 fucntoin modify or use a convetion for a certain messure
 char mesure[30] is the messure name
 */
-void modifORuse_simple (MESURE * messure,int &num_messures,char mesure[30])
+void modifORuse_simple (MESURE * messure,int &num_messures,char mesure[30],SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
   int a = 0,dest = 0,source = 0; // dest for destionation messure and source for intial messure in case we are to do a convertion
   PREFIX prefix; 
@@ -156,13 +175,15 @@ void modifORuse_simple (MESURE * messure,int &num_messures,char mesure[30])
     else if(a == 2) cout << "modify" << endl << "use" << endl << "\033[31m" <<"BACK" << "\033[37m" << endl << "back to menu" << endl;
     else cout << "modify" << endl << "use" << endl <<"back"<< endl << "\033[31m" << "BACK TO MENU" << "\033[37m" << endl;
     //-----end of display of choices
+    Sleep(100);
   }
 
   //-------fucntion calls depending on choice made
-  if (a == 3) main_menu(messure,num_messures);// to return to the main menu
-  else if(a == 2) display_messures_simple(messure,num_messures); // to return to display of simple messures convertions
+  if (a == 3) main_menu(messure,num_messures,sp_messure,sp_num_messures);// to return to the main menu
+  else if(a == 2) display_messures_simple(messure,num_messures,sp_messure,sp_num_messures); // to return to display of simple messures convertions
   else if(a == 1) use_convert_simple(convertion,mesure,source,dest,prefix);// to use a messure
-  else modif_mesure_simple(messure,num_messures,mesure); // to modify a messure
+  else modif_mesure_simple(messure,num_messures,mesure); // to modify a messure\
+  //------------
 }
 
 
@@ -178,14 +199,21 @@ void add_mesure_simple(MESURE * messure,int &num_messures)
   cout << "Enter the type" << endl;
   cin.getline(messure[num_messures].type,30); // to get the type of the messure
   num_messures++;
-  main_menu(messure,num_messures);// now we return to the main menu
 }
 
+
+void add_mesure_special(SPECIALMESURE * sp_messure,int &sp_num_messures)
+{
+  cout << "Enter the convetion name" << endl;
+  cin.getline(sp_messures[sp_num_messures].con_name,30);
+  cout << "Enter the nature" << endl; 
+  cin.getlin(sp_messure[sp_num_messures].nature,30)
+}
 
 /*
 function for the actual modification of a messure for simple convertions
 */
-void modif_mesure_simple(MESURE * messure,int &num_messures,char mesure[30])
+void modif_mesure_simple(MESURE * messure,int &num_messures,char mesure[30],SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
   int a = 0;
   while (true)// display of existing messures store in the messure array
@@ -224,12 +252,13 @@ void modif_mesure_simple(MESURE * messure,int &num_messures,char mesure[30])
   }
 
   //--------function calls depending on choice made
-  if(a == num_messures + 1) main_menu(messure,num_messures);// to to main menu
+  if(a == num_messures + 1) main_menu(messure,num_messures,sp_messure,sp_num_messures);// to to main menu
   else if(a == num_messures) modifORuse_simple (messure,num_messures,mesure); // to return to previous fucntion
   else modif_mech_simple(messure,a,num_messures,mesure);// to modify 
   main_menu(messure,num_messures);
   //----------
 }
+
 
 /*
 function for the modification mechanism
@@ -352,6 +381,7 @@ void use_convert_simple(CONVERTION &convertion,char mesure[30],int & source,int 
   else if(source == 3 && dest != 3) cout << value << " " << mesure << " " << "is equal to " << Basic_convert(convertion,source, dest,situation_simple(source,dest)) << " " << dest_name << " " << mesure << endl;
   else if(source != 3 && dest == 3) cout << value << source_name << " " << mesure << " " << "is equal to " << Basic_convert(convertion,source, dest,situation_simple(source,dest)) << " " << mesure << endl;
   else cout << value << " " << mesure << " " << "is equal to " << Basic_convert(convertion,source, dest,situation_simple(source,dest)) << " " << mesure << endl;
+  while(true) if(GetAsyncKeyState(0x0D)) break;
   //-----------
 }
 
@@ -429,6 +459,7 @@ void select_units_simple(char mesure[30],int & source,int & dest)
   dest = sourceTOdest_simple(mesure);
 }
 
+
 /*
 function for the selcetion of the unit
 */
@@ -438,6 +469,7 @@ int sourceTOdest_simple(char mesure[30])
   int a = 0;
   while(true)
   {
+    system("cls");
     //------------input colletion
     if(GetAsyncKeyState(0x26)) 
     {
@@ -465,9 +497,303 @@ int sourceTOdest_simple(char mesure[30])
     else if(a == 4) cout << "kilo" << endl << "hecto" << endl << "deca" << endl << mesure << endl <<  "\033[31m" << "DECI" << "\033[37m" << endl << "centi" << endl << "milli" << endl;
     else if(a == 5) cout << "kilo" << endl << "hecto" << endl << "deca" << endl << mesure << endl << "deci" << endl << "\033[31m" << "CENTI" << "\033[37m" << endl << "milli" << endl;
     else  cout << "kilo" << endl << "hecto" << endl << "deca" << endl << mesure << endl << "deci" << endl << "centi" << endl << "\033[31m" << "MILLI" << "\033[37m" << endl;
+    Sleep(100);
   }
   //-------------   
 
   return a;//returns the selected unit
 }
 
+
+/*
+display function
+messure an array for simple messures
+num_mussres the number of messures stored in the messure arry
+sp_messure an array fo special convertions
+sp_num_messures the number of special convertions stored in sp_messure
+*/
+void display_messure(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures)
+{
+  system("cls");
+  int a = 0;
+  while(true) // choice making
+  {
+    system("cls");
+    //--------------input collction
+    if(GetAsyncKeyState(0x26) || GetAsyncKeyState(0x28)) 
+    {
+      if(a == 0) a = 1;
+      else a = 0;
+    } 
+    if(GetAsyncKeyState(0x0D)) break;
+    //---------------
+
+    //-------------function calls depending on choice made 
+    if(a == 1) cout << "SIMPLE MESSUREMENTS" << endl << "special messurements" << endl; // to dislay simple messure
+    else cout << "simple messurements" << endl << "SPECIAL MESSUREMENTS" << endl; // to dislay special messure
+    //----------
+    Sleep(100);
+  }
+  if(a == 0) display_messures_simple(messure,num_messures,sp_messure,sp_num_messures);
+  else display_messure_special(messure,num_messures,sp_messure,sp_num_messures);
+  main_menu(messure,num_messures,sp_messure,sp_num_messures);
+}
+
+void display_messure_special(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures)
+{
+  int a = sp_num_messures + 5;
+  while (true)
+  {
+    system("cls");
+    if(GetAsyncKeyState(0x26))
+    {
+      if(a == 0) a = sp_num_messures + 6;
+      else a -= 1;
+    }
+    if(GetAsyncKeyState(0x28))
+    {
+      if(a == sp_num_messures + 6) a = 0;
+      else a += 1;
+    }
+    if(a == sp_num_messures + 1) cout << "\033[31m" <<"METER TO MILES" << "\033[37m" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "livre to gallon" << endl << "gallon ot livre" << endl;
+    else if(a == sp_num_messures + 2) cout << "meter to miles" << endl << "\033[31m" <<"MILES OT METER" << "\033[37m" << endl << "grammes to livre" << endl << "livre to grames" << endl << "livre to gallon" << endl << "gallon ot livre" << endl;
+    else if(a == sp_num_messures + 3) cout << "meter to miles" << endl << "miles to meter" << endl << "\033[31m" <<"GRAMMES TO LIVRE" << "\033[37m" << endl << "livre to grames" << endl << "livre to gallon" << endl << "gallon ot livre" << endl;
+    else if(a == sp_num_messures + 4) cout << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "\033[31m" <<"LIVRE TO GRAMMES" << "\033[37m" << endl << "livre to gallon" << endl << "gallon ot livre" << endl;
+    else if(a == sp_num_messures + 5) cout << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "\033[31m" <<"LIVRE TO GALLON" << "\033[37m" << endl << "gallon ot livre" << endl;
+    else if(a == sp_num_messures + 6) cout << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "livre to gallon" << endl << "\033[31m" << "GALLON TO LIVRE" << "\033[73m" << endl;
+    else << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "livre to gallon" << endl << "gallon to livre" << endl;
+    for (int i = 0; i < sp_num_messures; i++)
+    {
+      if(a == i) 
+      {
+        upper_case(sp_messure[i].con_name);
+        cout << endl;
+      }
+      else cout << sp_messure[i].con_name << endl;
+    }
+    if(a == sp_num_messures) cout << "\033[31m" << "BACK" << "\033[37m" << endl;
+    else cout << "back" << endl;
+    Sleep(100);
+  }
+
+  if(a >= 0 && a < sp_num_messures) void mdoifyORuse_special_messure (messure,num_messures,sp_messure,sp_num_messures,a);
+  else ////////////////////////////////////////////////
+
+  
+}
+
+void mdoifyORuse_special_messure (MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures,int modif_use)
+{
+  int a = 0;
+  
+  while(true)
+  {
+    system("cls");
+    //-----choice input mechanicsm
+    if(GetAsyncKeyState(0x26))
+    {
+      if(a == 0) a = 3;
+      else if(a == 1) a = 0;
+      else if(a == 2) a = 1;
+      else a = 2;
+    }
+    if(GetAsyncKeyState(0x28))
+    {
+      if(a == 0) a = 1;
+      else if(a == 1) a = 2;
+      else if(a == 2) a = 3;
+      else a = 0;
+    }
+    if(GetAsyncKeyState(0x0D)) break;
+    //----------end of input colletion
+
+    //----display of choices 
+    if(a == 0) cout << "\033[31m" << "MODIFY" << "\033[37m" << endl << "use" << endl << "back" << endl << "back to menu" << endl;
+    else if(a == 1) cout << "modify" << endl << "\033[31m" <<"USE" << "\033[37m" << endl << "back" << endl << "back to menu" << endl;
+    else if(a == 2) cout << "modify" << endl << "use" << endl << "\033[31m" <<"BACK" << "\033[37m" << endl << "back to menu" << endl;
+    else cout << "modify" << endl << "use" << endl <<"back"<< endl << "\033[31m" << "BACK TO MENU" << "\033[37m" << endl;
+    //-----end of display of choices
+    Sleep(100);
+  }
+
+  //-------fucntion calls depending on choice made
+  if (a == 3) main_menu(messure,num_messures,sp_messure,sp_num_messures);// to return to the main menu
+  else if(a == 2) display_messures_special(messure,num_messures,sp_messure,sp_num_messures); // to return to display of simple messures convertions
+  else if(a == 1) /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  else mdoify_special_messure (messure,num_messures,sp_messure,sp_num_messures,modif_use);
+  //--------------------
+}
+
+void mdoify_special_messure (MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures,int modif)
+{
+  system("cls");
+  char temp_con_name[30];
+  char temp_type[30];
+	char temp_nature[30];
+	char temp_intial_unit[10];
+  char temp_final_unit[10];
+	int temp_sign_to_use;
+  double temp_constant;
+  char answer = 'n';
+  bool ifname = false,iftype = false, iftintial = false,ifnature = false,iffinal = false,ifconst = false,ifsign = false;
+
+  cout << "Answer yes or no please (y/n)" << endl << endl;
+  cout << "Do yo want to modify the convertion name" << endl;
+  cin >> answer;
+  while (answer != 'n' && answer != 'y')
+  {
+    cout << "invalid choice" << endl;
+    cout << "Answer yes or no please (y/n)" << endl << endl;
+    cout << "Do yo want to modify the convertion name" << endl;
+    cin >> answer;
+  }
+  if(answer == 'y')
+  {
+    ifname = true;
+    cout << "enter the new convertion name" << endl;
+    cin.getline(temp_con_name,30);
+  }
+
+  cout << "Do yo want to modify the nature name" << endl;
+  cin >> answer;
+  while (answer != 'n' && answer != 'y')
+  {
+    cout << "invalid choice" << endl;
+    cout << "Answer yes or no please (y/n)" << endl << endl;
+    cout << "Do yo want to modify the nature name" << endl;
+    cin >> answer;
+  }
+
+  if(answer == 'y')
+  {
+    ifnature = true;
+    cout << "enter the new nature name" << endl;
+    cin.getline(temp_nature,30);
+  }
+
+
+  cout << "Do yo want to modify the type name" << endl;
+  cin >> answer;
+  while (answer != 'n' && answer != 'y')
+  {
+    iftype = true;
+    cout << "invalid choice" << endl;
+    cout << "Answer yes or no please (y/n)" << endl << endl;
+    cout << "Do yo want to modify the type name" << endl;
+    cin >> answer;
+  }
+  if(answer == 'y')
+  {
+    cout << "enter the new type name" << endl;
+    cin.getline(temp_type,30);
+  }
+
+
+  cout << "Do yo want to modify the initial unit  name" << endl;
+  cin >> answer;
+  while (answer != 'n' && answer != 'y')
+  {
+    cout << "invalid choice" << endl;
+    cout << "Answer yes or no please (y/n)" << endl << endl;
+    cout << "Do yo want to modify the initial unit name" << endl;
+    cin >> answer;
+  }
+  if(answer == 'y')
+  {
+    iftintial = true;
+    cout << "enter the new intitial unit name" << endl;
+    cin.getline(temp_intial_unit,10);
+  }
+
+  cout << "Do yo want to modify the final unit  name" << endl;
+  cin >> answer;
+  while (answer != 'n' && answer != 'y')
+  {
+    cout << "invalid choice" << endl;
+    cout << "Answer yes or no please (y/n)" << endl << endl;
+    cout << "Do yo want to modify the final unit name" << endl;
+    cin >> answer;
+  }
+if(answer == 'y')
+{
+  iffinal = true;
+  cout << "enter the new final unit name" << endl;
+  cin.getline(temp_final_unit,10);
+}
+
+  cout << "Do yo want to modify the convertion constant" << endl;
+  cin >> answer;
+  while (answer != 'n' && answer != 'y')
+  {
+    cout << "invalid choice" << endl;
+    cout << "Answer yes or no please (y/n)" << endl << endl;
+    cout << "Do yo want to modify the convetion constant" << endl;
+    cin >> answer;
+  }
+  if(answer == 'y')
+  {
+    ifconst = true;
+    cout << "Enter the new convetion constante" << endl;
+    cin >> temp_constant;
+  }
+
+  cout << "Do yo want to modify the sign to be used" << endl;
+  cin >> answer;
+  while (answer != 'n' && answer != 'y')
+  {
+    cout << "invalid choice" << endl;
+    cout << "Answer yes or no please (y/n)" << endl << endl;
+    cout << "Do yo want to modify the sign to be used" << endl;
+    cin >> answer;
+  }
+  if(answer == 'y')
+  {
+    ifsign = true;
+    cout << "enter the new sign to be used" << endl << "1  for addition" << endl << "2 for substraction" << endl << "3 for multiplication" << endl << "4 for division" << endl;
+    cin >> temp_sign_to_use;
+    while (!(temp_sign_to_use >= 1 && temp_sign_to_use <= 4))
+    {
+      cout << "invalid entry" << endl;
+      cout << "enter the new sign to be used" << endl << "1  for addition" << endl << "2 for substraction" << endl << "3 for multiplication" << endl << "4 for division" << endl;
+      cin >> temp_sign_to_use;
+    }
+  }
+
+  int a = 0;
+  while (true)
+  {
+    system("cls");
+    if(GetAsyncKeyState(0x26)) 
+    {
+      if(a == 0) a = 2;
+      else if(a == 1) a = 0;
+      else a = 1;
+    }
+    if(GetAsyncKeyState(0x26)) 
+    {
+      if(a == 0) a = 1;
+      else if(a == 1) a = 2;
+      else a = 0;
+    }
+    if(GetAsyncKeyState(0x26)) break;
+
+    if(a == 0) cout << "\033[31m" <<"SAVE" << "\033[37m" << endl << "edit" << endl << "back" << endl;
+    else if(a == 1) cout << "save" << endl << "\033[31m" <<"EDIT" << "0\33[37m" << endl << "back" << endl;
+    else  cout << "save" << endl << "edit" << endl << "\033[31m" << "BACK" << "\033[37m" << endl;
+
+    Sleep(100);
+  }
+
+  if (a == 2) mdoifyORuse_special_messure (messure,num_messures,sp_messure,sp_num_messures);
+  else if (a == 1) mdoify_special_messure (messure,num_messures,sp_messure,sp_num_messures,modif);
+  else
+  {
+    if(ifname) temp_con_name == sp_messure[modif].con_name;
+    if(ifnature) temp_nature == sp_messure[modif].nature;
+    if(iftype) temp_type == sp_messure[modif].type;
+    if(iftintial) temp_intial_unit == sp_messure[modif].intial_unit;
+    if(iffinal) temp_final_unit == sp_messure[modif].final_unit;
+    if(ifconst) temp_constant = sp_messure[modif].constant;
+    if(ifsign) temp_sign_to_use = sp_messure[modif].sign_to_use;
+  }
+}

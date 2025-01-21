@@ -18,7 +18,7 @@ typedef struct
 	char nature[30];
 }MESURE;
 
-typedef struct // 
+typedef struct 
 {
 	char con_name[30];
 	char type[30];
@@ -37,20 +37,20 @@ typedef struct
 }CONVERTION;
 
 /*POUR LES CONVERSOINS DE TYPES BASIQUE*/
-double Basic_convert(CONVERTION &convertion, int source, int dest, int situation);
+double Basic_convert(CONVERTION &convertion, int dest);
 
 /*CONVERSION DES TYPES DE BASE VERS DES TYPES SPECIAUX*/
 
 //----------CAS DE LA DISTANCE
-double meter_to_miles(CONVERTION &convertion, int source);
+double meter_to_miles(CONVERTION &convertion);
 double miles_to_meter(CONVERTION &convertion, int dest, double valeur);
 
 //---------CAS DES MASSES
-double gramme_to_livre(CONVERTION &convertion, int source);
+double gramme_to_livre(CONVERTION &convertion);
 double livre_to_gramme(CONVERTION &convertion, int dest, double valeur);
 
 //----------CAS DES LITRES
-double litre_to_gallon(CONVERTION &convertion, int source);
+double litre_to_gallon(CONVERTION &convertion);
 double gallon_to_litre(CONVERTION &convertion, int dest, double valeur);
 
 #endif

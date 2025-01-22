@@ -72,12 +72,12 @@ void add_mesure(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,in
   while (true)
   {
     system("cls");
-    if(GetAsyncKeystate(0X26) || GetAsynckeystate(0X28))
+    if( GetAsyncKeyState(0X26) || GetAsyncKeyState(0X28))
     {
       if(a == 0) a = 1;
       else a = 0;
     }
-    if(GetAsyncKeystate(0X0D)) break;
+    if(GetAsyncKeyState(0X0D)) break;
 
     if(a == 0) cout << "\033[31m" << "ADD A SIMPLE MESSURE" << "\033[37m" << endl << "add a special convetion" << endl;
     else cout << "add a simple messure" << endl << "\033[31m" << "ADD A SPECIAL CONVERTION" << " \033[37m" << endl;
@@ -133,7 +133,7 @@ void display_messures_simple(MESURE * messure,int &num_messures,SPECIALMESURE * 
 
   //---------function calls depending on choice made
   if (a == num_messures + 1) main_menu(messure,num_messures,sp_messure,sp_num_messures);// to return to the main menu
-  else if(a == num_messures) display_messure(messure,num_messures,sp_messure,sp_messure,sp_num_messures);
+  else if(a == num_messures) display_messure(messure,num_messures,sp_messure,sp_num_messures);
   else modifORuse_simple (messure,num_messures,messure[a].type,sp_messure,sp_num_messures);// to modify or use a convertion
   //----------
 }
@@ -182,7 +182,7 @@ void modifORuse_simple (MESURE * messure,int &num_messures,char mesure[30],SPECI
   if (a == 3) main_menu(messure,num_messures,sp_messure,sp_num_messures);// to return to the main menu
   else if(a == 2) display_messures_simple(messure,num_messures,sp_messure,sp_num_messures); // to return to display of simple messures convertions
   else if(a == 1) use_convert_simple(convertion,mesure,source,dest,prefix);// to use a messure
-  else modif_mesure_simple(messure,num_messures,mesure); // to modify a messure\
+  else modif_mesure_simple(messure,num_messures,mesure,sp_messure,sp_num_messures); // to modify a messure\
   //------------
 }
 
@@ -205,11 +205,11 @@ void add_mesure_simple(MESURE * messure,int &num_messures)
 void add_mesure_special(SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
   cout << "Enter the convetion name" << endl;
-  cin.getline(sp_messures[sp_num_messures].con_name,30);
+  cin.getline(sp_messure[sp_num_messures].con_name,30);
   cout << "Enter the nature" << endl; 
-  cin.getlin(sp_messure[sp_num_messures].nature,30);
+  cin.getline(sp_messure[sp_num_messures].nature,30);
   cout << "Enter the type" << endl; 
-  cin.getlin(sp_messure[sp_num_messures].type,30)
+  cin.getline(sp_messure[sp_num_messures].type,30)
   cout << "Enter the initial unit" << endl;
   cin.getline(sp_messure[sp_num_messures].intial_unit,30);
   cout << "Enter the final unit" << endl;
@@ -271,9 +271,9 @@ void modif_mesure_simple(MESURE * messure,int &num_messures,char mesure[30],SPEC
 
   //--------function calls depending on choice made
   if(a == num_messures + 1) main_menu(messure,num_messures,sp_messure,sp_num_messures);// to to main menu
-  else if(a == num_messures) modifORuse_simple (messure,num_messures,mesure); // to return to previous fucntion
+  else if(a == num_messures) modifORuse_simple (messure,num_messures,mesure,sp_messure,sp_num_messures); // to return to previous fucntion
   else modif_mech_simple(messure,a,num_messures,mesure);// to modify 
-  main_menu(messure,num_messures);
+  main_menu(messure,num_messures,sp_messure,sp_num_messures);
   //----------
 }
 
@@ -282,7 +282,7 @@ void modif_mesure_simple(MESURE * messure,int &num_messures,char mesure[30],SPEC
 function for the modification mechanism
 modif is the positon in the messure array that contains to messure to be modified
 */
-void modif_mech_simple(MESURE * messure,int modif,int &num_messures,char mesure[30])
+void modif_mech_simple(MESURE * messure,int modif,int &num_messures,char mesure[30],SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
   system("cls");
   int b = 0;// to nevigate over chioces
@@ -365,7 +365,7 @@ void modif_mech_simple(MESURE * messure,int modif,int &num_messures,char mesure[
     if(type_modif) messure[modif].type == inter_type;
   }
   else if(b == 1) modif_mech_simple(messure,modif,num_messures,mesure);// do not save change and recalls the fucntion itself
-  else modif_mesure_simple(messure,num_messures,mesure); //return backward
+  else modif_mesure_simple(messure,num_messures,mesure,sp_messure,sp_num_messures); //return backward
 }
 
 
@@ -411,14 +411,14 @@ source_dest_value is the value that represents a unit in the the convertion enum
 void source_dest_name(char mesure[30],char name[10],int source_dest_value)
 {
   if (source_dest_value == 0) 
-  [
+  {
     name[0] = 'K';
     name[1] = 'i';
     name[2] = 'l';
     name[3] = 'o';
     name[4] = '\0';
-  ]
-  else if (source_dest_value == 0) 
+  }
+  else if (source_dest_value == 1) 
   {
     name[0] = 'H';
     name[1] = 'e';
@@ -428,7 +428,7 @@ void source_dest_name(char mesure[30],char name[10],int source_dest_value)
     name[5] = '\0';
 
   }
-  else if (source_dest_value == 0) 
+  else if (source_dest_value == 2) 
   {
     name[0] = 'D';
     name[1] = 'e';
@@ -436,8 +436,8 @@ void source_dest_name(char mesure[30],char name[10],int source_dest_value)
     name[3] = 'a';
     name[4] = '\0';
   }
-  else if (source_dest_value == 0) name = mesure;
-  else if (source_dest_value == 0) 
+  else if (source_dest_value == 3) name = mesure;
+  else if (source_dest_value == 4) 
   {
     name[0] = 'C';
     name[1] = 'e';
@@ -446,7 +446,7 @@ void source_dest_name(char mesure[30],char name[10],int source_dest_value)
     name[4] = 'i';
     name[5] = '\0';
   }
-  else if (source_dest_value == 0) 
+  else if (source_dest_value == 5) 
   {
     name[0] = 'D';
     name[1] = 'e';
@@ -597,7 +597,7 @@ void display_messure_special(MESURE * messure,int &num_messures,SPECIALMESURE * 
   if(a == sp_num_messures + 1 || a == sp_num_messures + 3 || a == sp_num_messures + 5) cout << "enter initial unit" << endl;
   else if(a == sp_num_messures + 2 || a == sp_num_messures + 5 || a == sp_num_messures + 6) cout << "enter final unit" << endl;
   if(a >= 0 && a < sp_num_messures) void mdoifyORuse_special_messure (messure,num_messures,sp_messure,sp_num_messures,a);
-  else if(a != sp_num_messures) use_predifine_special_convertion(a,sp_num_messures,,request_value());
+  else if(a != sp_num_messures) use_predifine_special_convertion(a,sp_num_messures,request_value());
 
   
 }
@@ -639,8 +639,8 @@ void mdoifyORuse_special_messure (MESURE * messure,int &num_messures,SPECIALMESU
 
   //-------fucntion calls depending on choice made
   if (a == 3) main_menu(messure,num_messures,sp_messure,sp_num_messures);// to return to the main menu
-  else if(a == 2) display_messures_special(messure,num_messures,sp_messure,sp_num_messures); // to return to display of simple messures convertions
-  else if(a == 1) /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  else if(a == 2) display_messure_special(messure,num_messures,sp_messure,sp_num_messures); // to return to display of simple messures convertions
+  else if(a == 1) cout << "&";
   else mdoify_special_messure (messure,num_messures,sp_messure,sp_num_messures,modif_use);
   //--------------------
 }
@@ -805,7 +805,7 @@ if(answer == 'y')
     Sleep(100);
   }
 
-  if (a == 2) mdoifyORuse_special_messure (messure,num_messures,sp_messure,sp_num_messures);
+  if (a == 2) mdoifyORuse_special_messure (messure,num_messures,sp_messure,sp_num_messures,modif);
   else if (a == 1) mdoify_special_messure (messure,num_messures,sp_messure,sp_num_messures,modif);
   else
   {
@@ -817,7 +817,7 @@ if(answer == 'y')
     if(ifconst) temp_constant = sp_messure[modif].constant;
     if(ifsign) temp_sign_to_use = sp_messure[modif].sign_to_use;
   }
-
+}
 void use_predifine_special_convertion(int m,int b,int dest_or_source,int value)
 {
   char name[10];
@@ -832,6 +832,6 @@ void use_predifine_special_convertion(int m,int b,int dest_or_source,int value)
   
   if(a == b + 1 && name != 'metre') cout << endl << endl << convertion.valeur<< " " << name << "metre" << " is equal to" << meter_to_miles(convertion,sourceTOdest_simple('metre')) << "mille" << endl; 
   else if (a == b + 1 && name == 'metre') cout << endl << endl << convertion.valeur << " " << "metre" << " is equal to" << meter_to_miles(convertion,sourceTOdest_simple('metre')) << "mille" << endl; 
-  else if(a == b + 2 & name != 'metre') cout << convertion.valeur << " mille" << " is equal to" << 
+  else if(a == b + 2 & name != 'metre') cout << convertion.valeur << " mille" << " is equal to" << endl;
   
 }

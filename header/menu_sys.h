@@ -25,6 +25,7 @@ void add_mesure(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,in
 void add_mesure_special(SPECIALMESURE * sp_messure,int &sp_num_messures);
 void display_messure_special(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures);
 void mdoifyORuse_special_messure (MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures,int modif_use);
-void mdoify_special_messure (MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures,int modif)
+void mdoify_special_messure (MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures,int modif);
+void use_predifine_special_convertion(int m,int b,int dest_or_source,int value);
 
 #endif

@@ -18,17 +18,14 @@ typedef struct
 	char nature[30];
 }MESURE;
 
-<<<<<<< HEAD
-typedef struct //  
-=======
+
 typedef struct 
->>>>>>> refs/remotes/origin/main
 {
 	char con_name[30];
 	char type[30];
 	char nature[30];
 	char intial_unit[10];
-    char finial_unit[10];
+    char final_unit[10];
 	int sign_to_use;
 	double constant;
 }SPECIALMESURE;

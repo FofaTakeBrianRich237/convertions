@@ -209,7 +209,7 @@ void add_mesure_special(SPECIALMESURE * sp_messure,int &sp_num_messures)
   cout << "Enter the nature" << endl; 
   cin.getline(sp_messure[sp_num_messures].nature,30);
   cout << "Enter the type" << endl; 
-  cin.getline(sp_messure[sp_num_messures].type,30)
+  cin.getline(sp_messure[sp_num_messures].type,30);
   cout << "Enter the initial unit" << endl;
   cin.getline(sp_messure[sp_num_messures].intial_unit,30);
   cout << "Enter the final unit" << endl;
@@ -219,7 +219,7 @@ void add_mesure_special(SPECIALMESURE * sp_messure,int &sp_num_messures)
   cout << "Enter the sign to be used on the constant" << endl;
   cout << "Enter:" << endl << "1  for addition" << endl << "2 for substraction" << endl << "3 for multiplication" << endl << "4 for division" << endl;
   cin >> sp_messure[sp_num_messures].sign_to_use;
-  while (!(temp_sign_to_use >= 1 && temp_sign_to_use <= 4))
+  while (!( sp_messure[sp_num_messures].sign_to_use >= 1 && sp_messure[sp_num_messures].sign_to_use <= 4))
   {
     cout << "Invalid entry" << endl;
     cout << "Enter:" << endl << "1  for addition" << endl << "2 for substraction" << endl << "3 for multiplication" << endl << "4 for division" << endl;
@@ -822,16 +822,16 @@ void use_predifine_special_convertion(int m,int b,int dest_or_source,int value)
 {
   char name[10];
   CONVERTION convertion;
-  if(m == b + 1 || a == b + 2) source_dest_name('metre',name,sourceTOdest_simple('metre'));
-  else if(m == b + 3 || a == b + 4) source_dest_name('gramme',name,sourceTOdest_simple('gramme'));
-  else if(m == b + 5 || a == b + 6) source_dest_name('litre',name,sourceTOdest_simple('litre'));
+  if(m == b + 1 || a == b + 2) source_dest_name("metre",name,sourceTOdest_simple("metre"));
+  else if(m == b + 3 || a == b + 4) source_dest_name("gramme",name,sourceTOdest_simple("gramme"));
+  else if(m == b + 5 || a == b + 6) source_dest_name("litre",name,sourceTOdest_simple("litre"));
 
   cout << "Enter value" << endl;
   cin >> convertion.valeur;
 
   
-  if(a == b + 1 && name != 'metre') cout << endl << endl << convertion.valeur<< " " << name << "metre" << " is equal to" << meter_to_miles(convertion,sourceTOdest_simple('metre')) << "mille" << endl; 
-  else if (a == b + 1 && name == 'metre') cout << endl << endl << convertion.valeur << " " << "metre" << " is equal to" << meter_to_miles(convertion,sourceTOdest_simple('metre')) << "mille" << endl; 
-  else if(a == b + 2 & name != 'metre') cout << convertion.valeur << " mille" << " is equal to" << endl;
+  if(a == b + 1 && name != "metre") cout << endl << endl << convertion.valeur<< " " << name << "metre" << " is equal to" << meter_to_miles(convertion,sourceTOdest_simple("metre")) << "mille" << endl; 
+  else if (a == b + 1 && name == "metre") cout << endl << endl << convertion.valeur << " " << "metre" << " is equal to" << meter_to_miles(convertion,sourceTOdest_simple("metre")) << "mille" << endl; 
+  else if(a == b + 2 & name != "metre") cout << convertion.valeur << " mille" << " is equal to" << endl;
   
 }

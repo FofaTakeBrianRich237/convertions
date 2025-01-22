@@ -207,7 +207,25 @@ void add_mesure_special(SPECIALMESURE * sp_messure,int &sp_num_messures)
   cout << "Enter the convetion name" << endl;
   cin.getline(sp_messures[sp_num_messures].con_name,30);
   cout << "Enter the nature" << endl; 
-  cin.getlin(sp_messure[sp_num_messures].nature,30)
+  cin.getlin(sp_messure[sp_num_messures].nature,30);
+  cout << "Enter the type" << endl; 
+  cin.getlin(sp_messure[sp_num_messures].type,30)
+  cout << "Enter the initial unit" << endl;
+  cin.getline(sp_messure[sp_num_messures].intial_unit,30);
+  cout << "Enter the final unit" << endl;
+  cin.getline(sp_messure[sp_num_messures].final_unit,30);
+  cout << "Enter the constant for the convertion" << endl;
+  cin >> sp_messure[sp_num_messures].con_name;
+  cout << "Enter the sign to be used on the constant" << endl;
+  cout << "Enter:" << endl << "1  for addition" << endl << "2 for substraction" << endl << "3 for multiplication" << endl << "4 for division" << endl;
+  cin >> sp_messure[sp_num_messures].sign_to_use;
+  while (!(temp_sign_to_use >= 1 && temp_sign_to_use <= 4))
+  {
+    cout << "Invalid entry" << endl;
+    cout << "Enter:" << endl << "1  for addition" << endl << "2 for substraction" << endl << "3 for multiplication" << endl << "4 for division" << endl;
+    cin >> sp_messure[sp_num_messures].sign_to_use;
+  }
+
 }
 
 /*
@@ -555,13 +573,13 @@ void display_messure_special(MESURE * messure,int &num_messures,SPECIALMESURE * 
       if(a == sp_num_messures + 6) a = 0;
       else a += 1;
     }
-    if(a == sp_num_messures + 1) cout << "\033[31m" <<"METER TO MILES" << "\033[37m" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "livre to gallon" << endl << "gallon ot livre" << endl;
-    else if(a == sp_num_messures + 2) cout << "meter to miles" << endl << "\033[31m" <<"MILES OT METER" << "\033[37m" << endl << "grammes to livre" << endl << "livre to grames" << endl << "livre to gallon" << endl << "gallon ot livre" << endl;
-    else if(a == sp_num_messures + 3) cout << "meter to miles" << endl << "miles to meter" << endl << "\033[31m" <<"GRAMMES TO LIVRE" << "\033[37m" << endl << "livre to grames" << endl << "livre to gallon" << endl << "gallon ot livre" << endl;
-    else if(a == sp_num_messures + 4) cout << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "\033[31m" <<"LIVRE TO GRAMMES" << "\033[37m" << endl << "livre to gallon" << endl << "gallon ot livre" << endl;
-    else if(a == sp_num_messures + 5) cout << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "\033[31m" <<"LIVRE TO GALLON" << "\033[37m" << endl << "gallon ot livre" << endl;
-    else if(a == sp_num_messures + 6) cout << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "livre to gallon" << endl << "\033[31m" << "GALLON TO LIVRE" << "\033[73m" << endl;
-    else << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "livre to gallon" << endl << "gallon to livre" << endl;
+    if(a == sp_num_messures + 1) cout << "\033[31m" <<"METER TO MILES" << "\033[37m" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "litre to gallon" << endl << "gallon ot litre" << endl;
+    else if(a == sp_num_messures + 2) cout << "meter to miles" << endl << "\033[31m" <<"MILES OT METER" << "\033[37m" << endl << "grammes to livre" << endl << "livre to grames" << endl << "litre to gallon" << endl << "gallon ot litre" << endl;
+    else if(a == sp_num_messures + 3) cout << "meter to miles" << endl << "miles to meter" << endl << "\033[31m" <<"GRAMMES TO LIVRE" << "\033[37m" << endl << "livre to grames" << endl << "litre to gallon" << endl << "gallon ot litre" << endl;
+    else if(a == sp_num_messures + 4) cout << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "\033[31m" <<"LIVRE TO GRAMMES" << "\033[37m" << endl << "litre to gallon" << endl << "gallon ot litre" << endl;
+    else if(a == sp_num_messures + 5) cout << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "\033[31m" <<"LITRE TO GALLON" << "\033[37m" << endl << "gallon ot litre" << endl;
+    else if(a == sp_num_messures + 6) cout << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "litre to gallon" << endl << "\033[31m" << "GALLON TO LITRE" << "\033[73m" << endl;
+    else << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "litre to gallon" << endl << "gallon to litre" << endl;
     for (int i = 0; i < sp_num_messures; i++)
     {
       if(a == i) 
@@ -575,12 +593,15 @@ void display_messure_special(MESURE * messure,int &num_messures,SPECIALMESURE * 
     else cout << "back" << endl;
     Sleep(100);
   }
-
+  
+  if(a == sp_num_messures + 1 || a == sp_num_messures + 3 || a == sp_num_messures + 5) cout << "enter initial unit" << endl;
+  else if(a == sp_num_messures + 2 || a == sp_num_messures + 5 || a == sp_num_messures + 6) cout << "enter final unit" << endl;
   if(a >= 0 && a < sp_num_messures) void mdoifyORuse_special_messure (messure,num_messures,sp_messure,sp_num_messures,a);
-  else ////////////////////////////////////////////////
+  else if(a != sp_num_messures) use_predifine_special_convertion(a,sp_num_messures,,request_value());
 
   
 }
+
 
 void mdoifyORuse_special_messure (MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures,int modif_use)
 {
@@ -796,4 +817,21 @@ if(answer == 'y')
     if(ifconst) temp_constant = sp_messure[modif].constant;
     if(ifsign) temp_sign_to_use = sp_messure[modif].sign_to_use;
   }
+
+void use_predifine_special_convertion(int m,int b,int dest_or_source,int value)
+{
+  char name[10];
+  CONVERTION convertion;
+  if(m == b + 1 || a == b + 2) source_dest_name('metre',name,sourceTOdest_simple('metre'));
+  else if(m == b + 3 || a == b + 4) source_dest_name('gramme',name,sourceTOdest_simple('gramme'));
+  else if(m == b + 5 || a == b + 6) source_dest_name('litre',name,sourceTOdest_simple('litre'));
+
+  cout << "Enter value" << endl;
+  cin >> convertion.valeur;
+
+  
+  if(a == b + 1 && name != 'metre') cout << endl << endl << convertion.valeur<< " " << name << "metre" << " is equal to" << meter_to_miles(convertion,sourceTOdest_simple('metre')) << "mille" << endl; 
+  else if (a == b + 1 && name == 'metre') cout << endl << endl << convertion.valeur << " " << "metre" << " is equal to" << meter_to_miles(convertion,sourceTOdest_simple('metre')) << "mille" << endl; 
+  else if(a == b + 2 & name != 'metre') cout << convertion.valeur << " mille" << " is equal to" << 
+  
 }

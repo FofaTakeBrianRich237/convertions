@@ -18,7 +18,7 @@ typedef struct
 	char nature[30];
 }MESURE;
 
-typedef struct // 
+typedef struct //  
 {
 	char con_name[30];
 	char type[30];

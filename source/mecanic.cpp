@@ -699,7 +699,7 @@ double gallon_to_litre(CONVERTION &convertion, int dest, double valeur)
      double convert = 0.0;
     switch(dest)
     {
-        case 0: //LIVRE_TO_KILOGRAMME
+        case 0: //GALLON_TO_KILOGRAMME
         {
             convert = valeur * 3.785;
             convertion.valeur = convert;

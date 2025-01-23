@@ -3,10 +3,11 @@
 #include <typeinfo>
 #include "../header/menu_sys.h"
 #include "../header/mecanic.h"
+#include<fstream>
 #include <windows.h>
 using namespace std;
 
-//\033[31m" << "1 VS 1" << "\033[37m"  
+//9\033[31m" << "text" << "\033[37m") color code (for red color specifically)
 
 
 /*
@@ -62,7 +63,7 @@ void main_menu(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int
   }
   //-------------use of function depending on the chioce made
   if (a == 0) display_messure(messure,num_messures,sp_messure,sp_num_messures); // to display the different messures store in the messure array
-  else if (a == 1) add_mesure(messure,num_messures,sp_messure,sp_num_messures);
+  else if (a == 1) add_mesure(messure,num_messures,sp_messure,sp_num_messures);// to add a special convertion or a simple messure
 }
 
 
@@ -145,8 +146,7 @@ char mesure[30] is the messure name
 */
 void modifORuse_simple (MESURE * messure,int &num_messures,char mesure[30],SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
-  int a = 0,dest = 0,source = 0; // dest for destionation messure and source for intial messure in case we are to do a convertion
-  PREFIX prefix; 
+  int a = 0,dest = 0; // dest for destionation messure and source for intial messure in case we are to do a convertion
   CONVERTION convertion;
   while(true)
   {
@@ -181,7 +181,7 @@ void modifORuse_simple (MESURE * messure,int &num_messures,char mesure[30],SPECI
   //-------fucntion calls depending on choice made
   if (a == 3) main_menu(messure,num_messures,sp_messure,sp_num_messures);// to return to the main menu
   else if(a == 2) display_messures_simple(messure,num_messures,sp_messure,sp_num_messures); // to return to display of simple messures convertions
-  else if(a == 1) use_convert_simple(convertion,mesure,source,dest,prefix);// to use a messure
+  else if(a == 1) use_convert_simple(convertion,mesure,source);// to use a messure
   else modif_mesure_simple(messure,num_messures,mesure,sp_messure,sp_num_messures); // to modify a messure\
   //------------
 }
@@ -202,29 +202,36 @@ void add_mesure_simple(MESURE * messure,int &num_messures)
 }
 
 
+/*
+function to add a new special convert
+sp_messures is an array of th SPECIALMESURE type 
+sp_numesseres stores the number of elements in sp_messure
+*/
 void add_mesure_special(SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
   cout << "Enter the convetion name" << endl;
-  cin.getline(sp_messure[sp_num_messures].con_name,30);
+  cin.getline(sp_messure[sp_num_messures].con_name,30); // geting the special convertion's name
   cout << "Enter the nature" << endl; 
-  cin.getline(sp_messure[sp_num_messures].nature,30);
-  cout << "Enter the type" << endl; 
-  cin.getline(sp_messure[sp_num_messures].type,30);
-  cout << "Enter the initial unit" << endl;
-  cin.getline(sp_messure[sp_num_messures].intial_unit,30);
+  cin.getline(sp_messure[sp_num_messures].nature,30); // geting the nature name 
+  cout << "Enter the type" << endl;
+  cin.getline(sp_messure[sp_num_messures].type,30); // geting the type name
+  cout << "Enter the initial unit" << endl; 
+  cin.getline(sp_messure[sp_num_messures].intial_unit,30); // geting the initial unit
   cout << "Enter the final unit" << endl;
-  cin.getline(sp_messure[sp_num_messures].final_unit,30);
+  cin.getline(sp_messure[sp_num_messures].final_unit,30); // geting the final unit 
   cout << "Enter the constant for the convertion" << endl;
-  cin >> sp_messure[sp_num_messures].con_name;
+  cin >> sp_messure[sp_num_messures].constant; // geting the constant for the convertion
   cout << "Enter the sign to be used on the constant" << endl;
   cout << "Enter:" << endl << "1  for addition" << endl << "2 for substraction" << endl << "3 for multiplication" << endl << "4 for division" << endl;
-  cin >> sp_messure[sp_num_messures].sign_to_use;
-  while (!( sp_messure[sp_num_messures].sign_to_use >= 1 && sp_messure[sp_num_messures].sign_to_use <= 4))
+  cin >> sp_messure[sp_num_messures].sign_to_use; // geting the sign to be used with the constant upon the values to be cnverted
+  //--------------checking validity of the sign choiced
+  while (!( sp_messure[sp_num_messures].sign_to_use >= 1 && sp_messure[sp_num_messures].sign_to_use <= 4)) 
   {
     cout << "Invalid entry" << endl;
     cout << "Enter:" << endl << "1  for addition" << endl << "2 for substraction" << endl << "3 for multiplication" << endl << "4 for division" << endl;
     cin >> sp_messure[sp_num_messures].sign_to_use;
   }
+  //------------------
 
 }
 
@@ -273,8 +280,9 @@ void modif_mesure_simple(MESURE * messure,int &num_messures,char mesure[30],SPEC
   if(a == num_messures + 1) main_menu(messure,num_messures,sp_messure,sp_num_messures);// to to main menu
   else if(a == num_messures) modifORuse_simple (messure,num_messures,mesure,sp_messure,sp_num_messures); // to return to previous fucntion
   else modif_mech_simple(messure,a,num_messures,mesure);// to modify 
-  main_menu(messure,num_messures,sp_messure,sp_num_messures);
-  //----------
+  //--------
+
+  main_menu(messure,num_messures,sp_messure,sp_num_messures);// to return to main menu
 }
 
 
@@ -361,8 +369,8 @@ void modif_mech_simple(MESURE * messure,int modif,int &num_messures,char mesure[
   //---------actions depending of choice made
   if(b == 0) // to save changes made
   {
-    if(nature_modif) messure[modif].nature == inter_nature;
-    if(type_modif) messure[modif].type == inter_type;
+    if(nature_modif) messure[modif].nature == inter_nature;// save changes made to the nature name
+    if(type_modif) messure[modif].type == inter_type; // save changes made to th type name
   }
   else if(b == 1) modif_mech_simple(messure,modif,num_messures,mesure);// do not save change and recalls the fucntion itself
   else modif_mesure_simple(messure,num_messures,mesure,sp_messure,sp_num_messures); //return backward
@@ -375,30 +383,30 @@ dest is the destination unit
 source is the initial unit
 prefix store the different prefixes for convetions
 */
-void use_convert_simple(CONVERTION &convertion,char mesure[30],int & source,int & dest,PREFIX prefix)
+void use_convert_simple(CONVERTION &convertion,char mesure[30],int & dest)
 {
   system("cls");
-  int value = 0;
+  
   
   char source_name[10];// source unit
   char dest_name[10];// destination unit 
   
-  select_units_simple(mesure,source,dest); // destination and source unit selection
+  select_units_simple(mesure,convertion,dest); // destination and source unit selection
   
   cout << "enter value" << endl;
-  cin >> value;
+  cin >> convertion.valeur;
   //--------assignation of source and destionation units nae=me
-  source_dest_name(mesure,source_name,source);
-  source_dest_name(mesure,dest_name,source);
+  source_dest_name(mesure,source_name,convertion.prefixe);
+  source_dest_name(mesure,dest_name,convertion.prefixe);
   //----------
   
   //----to display the answer of the convetions
     //Basic_convet is the function that dose the convetion
   cout << "Convertion made" << endl << endl;
-  if(source !=3 && dest != 3) cout << value << source_name << " " << mesure << " " << "is equal to " << Basic_convert(convertion,source, dest,situation_simple(source,dest)) << " " << dest_name << " " << mesure << endl;
-  else if(source == 3 && dest != 3) cout << value << " " << mesure << " " << "is equal to " << Basic_convert(convertion,source, dest,situation_simple(source,dest)) << " " << dest_name << " " << mesure << endl;
-  else if(source != 3 && dest == 3) cout << value << source_name << " " << mesure << " " << "is equal to " << Basic_convert(convertion,source, dest,situation_simple(source,dest)) << " " << mesure << endl;
-  else cout << value << " " << mesure << " " << "is equal to " << Basic_convert(convertion,source, dest,situation_simple(source,dest)) << " " << mesure << endl;
+  if(convertion.prefixe !=3 && dest != 3) cout << convertion.valeur << source_name << " " << mesure << " " << "is equal to " << Basic_convert(convertion,dest) << " " << dest_name << " " << mesure << endl;
+  else if(convertion.prefixe == 3 && dest != 3) cout << convertion.valeur << " " << mesure << " " << "is equal to " << Basic_convert(convertion,dest) << " " << dest_name << " " << mesure << endl;
+  else if(convertion.prefixe != 3 && dest == 3) cout << convertion.valeur << source_name << " " << mesure << " " << "is equal to " << Basic_convert(convertion,dest) << " " << mesure << endl;
+  else cout << convertion.valeur << " " << mesure << " " << "is equal to " << Basic_convert(convertion,dest) << " " << mesure << endl;
   while(true) if(GetAsyncKeyState(0x0D)) break;
   //-----------
 }
@@ -469,19 +477,19 @@ void source_dest_name(char mesure[30],char name[10],int source_dest_value)
 /*
 function to selcet intial and destination unit
 */
-void select_units_simple(char mesure[30],int & source,int & dest)
+void select_units_simple(char mesure[30],CONVERTION &convertion,int & dest)
 {
   cout << "Select initial unit" << endl;
-  source = sourceTOdest_simple(mesure);
+  convertion.prefixe = sourceTOdest(mesure); // to initialise source unit
   cout << "Select final unit" << endl;
-  dest = sourceTOdest_simple(mesure);
+  dest = sourceTOdest(mesure);// to determine final unit
 }
 
 
 /*
 function for the selcetion of the unit
 */
-int sourceTOdest_simple(char mesure[30])
+int sourceTOdest(char mesure[30])
 {
   system("cls");
   int a = 0;
@@ -552,17 +560,26 @@ void display_messure(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messu
     //----------
     Sleep(100);
   }
-  if(a == 0) display_messures_simple(messure,num_messures,sp_messure,sp_num_messures);
-  else display_messure_special(messure,num_messures,sp_messure,sp_num_messures);
-  main_menu(messure,num_messures,sp_messure,sp_num_messures);
+
+  //---------------function calls depending on choices made
+  if(a == 0) display_messures_simple(messure,num_messures,sp_messure,sp_num_messures); // to dislpay simple messuress
+  else display_messure_special(messure,num_messures,sp_messure,sp_num_messures);// to display special convertions
+  //---------------
+
+  main_menu(messure,num_messures,sp_messure,sp_num_messures);// to return to the main menu 
 }
 
+
+/*
+functino to diaplY spcecial convetions
+*/
 void display_messure_special(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
-  int a = sp_num_messures + 5;
+  int a = sp_num_messures + 5; // variable for navigation over and choice of convetion
   while (true)
   {
     system("cls");
+    //---------input collection
     if(GetAsyncKeyState(0x26))
     {
       if(a == 0) a = sp_num_messures + 6;
@@ -573,6 +590,11 @@ void display_messure_special(MESURE * messure,int &num_messures,SPECIALMESURE * 
       if(a == sp_num_messures + 6) a = 0;
       else a += 1;
     }
+    if(GetAsyncKeyState(0x0D)) break;
+    //--------------
+
+    //-----------------choice display
+      //-------display of predifine special convertions
     if(a == sp_num_messures + 1) cout << "\033[31m" <<"METER TO MILES" << "\033[37m" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "litre to gallon" << endl << "gallon ot litre" << endl;
     else if(a == sp_num_messures + 2) cout << "meter to miles" << endl << "\033[31m" <<"MILES OT METER" << "\033[37m" << endl << "grammes to livre" << endl << "livre to grames" << endl << "litre to gallon" << endl << "gallon ot litre" << endl;
     else if(a == sp_num_messures + 3) cout << "meter to miles" << endl << "miles to meter" << endl << "\033[31m" <<"GRAMMES TO LIVRE" << "\033[37m" << endl << "livre to grames" << endl << "litre to gallon" << endl << "gallon ot litre" << endl;
@@ -580,6 +602,8 @@ void display_messure_special(MESURE * messure,int &num_messures,SPECIALMESURE * 
     else if(a == sp_num_messures + 5) cout << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "\033[31m" <<"LITRE TO GALLON" << "\033[37m" << endl << "gallon ot litre" << endl;
     else if(a == sp_num_messures + 6) cout << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "litre to gallon" << endl << "\033[31m" << "GALLON TO LITRE" << "\033[73m" << endl;
     else << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "litre to gallon" << endl << "gallon to litre" << endl;
+      //---------
+      //---------display of special convertions that have been added by users
     for (int i = 0; i < sp_num_messures; i++)
     {
       if(a == i) 
@@ -589,24 +613,27 @@ void display_messure_special(MESURE * messure,int &num_messures,SPECIALMESURE * 
       }
       else cout << sp_messure[i].con_name << endl;
     }
+     //-----------
     if(a == sp_num_messures) cout << "\033[31m" << "BACK" << "\033[37m" << endl;
     else cout << "back" << endl;
+    //---------------------
     Sleep(100);
   }
   
-  if(a == sp_num_messures + 1 || a == sp_num_messures + 3 || a == sp_num_messures + 5) cout << "enter initial unit" << endl;
-  else if(a == sp_num_messures + 2 || a == sp_num_messures + 5 || a == sp_num_messures + 6) cout << "enter final unit" << endl;
-  if(a >= 0 && a < sp_num_messures) void mdoifyORuse_special_messure (messure,num_messures,sp_messure,sp_num_messures,a);
-  else if(a != sp_num_messures) use_predifine_special_convertion(a,sp_num_messures,request_value());
-
-  
+  //-----------------fucntion call depending on the choices made
+  if(a >= 0 && a < sp_num_messures) void mdoifyORuse_special_messure (messure,num_messures,sp_messure,sp_num_messures,a); // to use or modify a special convertion
+  else if(a != sp_num_messures) use_predifine_special_convertion(a,sp_num_messures);  // to use a predifine convertion
+  //-----------------
 }
 
-
+/*
+fucntion to modify or use a special convertion
+modif_use store the position of the convertion to use or modify in sp_messure
+*/
 void mdoifyORuse_special_messure (MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures,int modif_use)
 {
   int a = 0;
-  
+
   while(true)
   {
     system("cls");
@@ -640,8 +667,8 @@ void mdoifyORuse_special_messure (MESURE * messure,int &num_messures,SPECIALMESU
   //-------fucntion calls depending on choice made
   if (a == 3) main_menu(messure,num_messures,sp_messure,sp_num_messures);// to return to the main menu
   else if(a == 2) display_messure_special(messure,num_messures,sp_messure,sp_num_messures); // to return to display of simple messures convertions
-  else if(a == 1) cout << "&";
-  else mdoify_special_messure (messure,num_messures,sp_messure,sp_num_messures,modif_use);
+  else if(a == 1) cout << "&";////////////////////////////////////////////////////////
+  else mdoify_special_messure (messure,num_messures,sp_messure,sp_num_messures,modif_use);// to modify special convertion
   //--------------------
 }
 
@@ -818,20 +845,77 @@ if(answer == 'y')
     if(ifsign) temp_sign_to_use = sp_messure[modif].sign_to_use;
   }
 }
-void use_predifine_special_convertion(int m,int b,int dest_or_source,int value)
+
+/*
+function to use predefined special convertion
+*/
+void use_predifine_special_convertion(int m,int b)
 {
-  char name[10];
-  CONVERTION convertion;
-  if(m == b + 1 || a == b + 2) source_dest_name("metre",name,sourceTOdest_simple("metre"));
-  else if(m == b + 3 || a == b + 4) source_dest_name("gramme",name,sourceTOdest_simple("gramme"));
-  else if(m == b + 5 || a == b + 6) source_dest_name("litre",name,sourceTOdest_simple("litre"));
+  char name[10];// to store the source or destination unit name
 
-  cout << "Enter value" << endl;
-  cin >> convertion.valeur;
+  //------------ffilling the unit name in name
+  if(m == b + 1 || a == b + 2) source_dest_name("metre",name,sourceTOdest_simple("metre")); // in case its from or to metre convetion
+  else if(m == b + 3 || a == b + 4) source_dest_name("gramme",name,sourceTOdest_simple("gramme")); // in case its from or to gramme convetion
+  else if(m == b + 5 || a == b + 6) source_dest_name("litre",name,sourceTOdest_simple("litre")); // in case its from or to litre convetion
+  //------------
 
-  
-  if(a == b + 1 && name != "metre") cout << endl << endl << convertion.valeur<< " " << name << "metre" << " is equal to" << meter_to_miles(convertion,sourceTOdest_simple("metre")) << "mille" << endl; 
-  else if (a == b + 1 && name == "metre") cout << endl << endl << convertion.valeur << " " << "metre" << " is equal to" << meter_to_miles(convertion,sourceTOdest_simple("metre")) << "mille" << endl; 
-  else if(a == b + 2 & name != "metre") cout << convertion.valeur << " mille" << " is equal to" << endl;
+  //--------------function calls depending on the special convertion choiced
+  if(m == b + 1 || m == b + 3  || m == b + 5)  use_predifine_special_convertion_for_source(m,b,name);
+  else  use_predifine_special_convertion_for_dest(m,b,name);
+  //-----------------
   
 }
+
+
+void use_predifine_special_convertion_for_source(int a,int b,char name[10])
+{
+  CONVERTION convertion;
+  cout << "choose unit"  << endl;
+  if(a == b + 1) convertion.prefixe = sourceTOdest("metre");
+  else if(a == b + 3) convertion.prefixe = sourceTOdest("grammes");
+  else convertion.prefixe = sourceTOdest("litre");
+
+  cout << "enter value to be converted" << endl;
+  cin >> convertion.valeur;
+
+  if(a == b + 1 && convertion.prefixe == 3 ) cout << convertion.valeur << " metre" << " is equal to " << meter_to_miles(convertion) << " milles" << endl;
+  else if(a == b + 1 && convertion.prefixe != 3 ) cout << convertion.valeur << name << " metre" << " is equal to " << meter_to_miles(convertion) << " milles" << endl;
+  else if(a == b + 3 && convertion.prefixe == 3) cout << convertion.valeur << " grammes" << " is equal to " << gramme_to_livre(convertion) << " livre" << endl;
+  else if(a == b + 3 && convertion.prefixe != 3) cout << convertion.valeur << name << " grammes" << " is equal to " << gramme_to_livre(convertion) << " livre" << endl;
+  else if(a == b + 5 && convertion.prefixe == 3) cout << convertion.valeur << " litre" << " is equal to " << litre_to_gallon(convertion) << " gallon" << endl;
+  else if(a == b + 5 && convertion.prefixe != 3) cout << convertion.valeur << name << " litre" << " is equal to " << litre_to_gallon(convertion) << " gallon" << endl;
+  
+  cout << endl < endl << "pres ENTER to proceed" << endl;
+  while(true) if(GetAsyncKeyState(0x0D)) break;
+}
+
+
+/*
+fucntion 
+*/
+void use_predifine_special_convertion_for_dest(int a,int b,char name[10])
+{
+  CONVERTION &convertion;
+  int dest;
+  double valeur;
+  
+  cout << " choose the final unit" << endl;
+  if(a == b + 2) dest = sourceTOdest("metre");
+  else if(a == b + 4) dest  = sourceTOdest("grammes");
+  else dest  = sourceTOdest("litre");
+
+  cout << "enter value to be converted" << endl;
+  cin >> valeur;
+
+  if(a == b + 2 && convertion.prefixe == 3) cout << valeur << " milles" << " is equal to " << miles_to_meter(convertion,dest,valeur) << " metre" << endl;
+  else if(a == b + 2 && convertion.prefixe != 3) cout << valeur << " milles" << " is equal to " << miles_to_meter(convertion,dest,valeur) << name << " metre" << endl;
+  else if(a == b + 4 && convertion.prefixe == 3) cout << valeur << " livre" << " is equal to " << livre_to_gramme(convertion,dest,valeur) << " metre" << endl;
+  else if(a == b + 4 && convertion.prefixe != 3) cout << valeur << " livre" << " is equal to " << livre_to_gramme(convertion,dest,valeur) << name << " metre" << endl;
+  else if(a == b + 6 && convertion.prefixe == 3) cout << valeur << " livre" << " is equal to " << gallon_to_litre(convertion,dest,valeur) << " metre" << endl;
+  else if(a == b + 6 && convertion.prefixe != 3) cout << valeur << " livre" << " is equal to " << gallon_to_litre(convertion,dest,valeur) << name << " metre" << endl;
+  
+  cout << endl < endl << "pres ENTER to proceed" << endl;
+  while(true) if(GetAsyncKeyState(0x0D)) break;
+}
+
+

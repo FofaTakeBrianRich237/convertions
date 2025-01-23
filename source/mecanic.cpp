@@ -425,19 +425,19 @@ double special_convert(SPECIALMESURE &specialmesure, double valeur)
 
         case 2: //do a simple soustraction with define constant
         {
-            spacialConvert = valeur-specialmesure.constant;
+            specialConvert = valeur-specialmesure.constant;
             break;
         }
 
         case 3: //do a simple multiplication with define constant
         {
-            spacialConvert = valeur*specialmesure.constant;
+            specialConvert = valeur*specialmesure.constant;
             break;
         }
 
         case 4: //do a simple division with define constant 
         {
-            spacialConvert = valeur/specialmesure.constant;
+            specialConvert = valeur/specialmesure.constant;
             break;
         }
     }

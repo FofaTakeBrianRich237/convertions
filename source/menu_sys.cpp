@@ -672,19 +672,28 @@ void mdoifyORuse_special_messure (MESURE * messure,int &num_messures,SPECIALMESU
   //--------------------
 }
 
+
+/*
+fucntion to modify a special convertion
+*/
 void mdoify_special_messure (MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures,int modif)
 {
   system("cls");
-  char temp_con_name[30];
-  char temp_type[30];
-	char temp_nature[30];
-	char temp_intial_unit[10];
-  char temp_final_unit[10];
-	int temp_sign_to_use;
-  double temp_constant;
-  char answer = 'n';
-  bool ifname = false,iftype = false, iftintial = false,ifnature = false,iffinal = false,ifconst = false,ifsign = false;
+  //-------intermidiate variable definitions
+  char temp_con_name[30]; // store name 
+  char temp_type[30]; // store type name 
+	char temp_nature[30]; // store nature name 
+	char temp_intial_unit[10]; // store inital unit 
+  char temp_final_unit[10]; // store final unit 
+	int temp_sign_to_use; // store sign
+  double temp_constant; // store convertion constant
+  //---------------
 
+  char answer = 'n'; // to get answer 
+  bool ifname = false,iftype = false, iftintial = false,ifnature = false,iffinal = false,ifconst = false,ifsign = false; // to dertemine which modificatin were made
+  
+
+  //---------------------geting the answers and the setting up the intermidiate variable(ici je suis deja tired louis tu vas flex de tout facon)
   cout << "Answer yes or no please (y/n)" << endl << endl;
   cout << "Do yo want to modify the convertion name" << endl;
   cin >> answer;
@@ -806,6 +815,7 @@ if(answer == 'y')
       cin >> temp_sign_to_use;
     }
   }
+  //-----------------------
 
   int a = 0;
   while (true)
@@ -866,24 +876,31 @@ void use_predifine_special_convertion(int m,int b)
   
 }
 
-
+/*
+function
+*/
 void use_predifine_special_convertion_for_source(int a,int b,char name[10])
 {
   CONVERTION convertion;
   cout << "choose unit"  << endl;
+
+  //--------source unit selection
   if(a == b + 1) convertion.prefixe = sourceTOdest("metre");
   else if(a == b + 3) convertion.prefixe = sourceTOdest("grammes");
   else convertion.prefixe = sourceTOdest("litre");
+  //----------
 
   cout << "enter value to be converted" << endl;
-  cin >> convertion.valeur;
-
+  cin >> convertion.valeur; // geting value to convert
+  
+  //----------converting and displaying result
   if(a == b + 1 && convertion.prefixe == 3 ) cout << convertion.valeur << " metre" << " is equal to " << meter_to_miles(convertion) << " milles" << endl;
   else if(a == b + 1 && convertion.prefixe != 3 ) cout << convertion.valeur << name << " metre" << " is equal to " << meter_to_miles(convertion) << " milles" << endl;
   else if(a == b + 3 && convertion.prefixe == 3) cout << convertion.valeur << " grammes" << " is equal to " << gramme_to_livre(convertion) << " livre" << endl;
   else if(a == b + 3 && convertion.prefixe != 3) cout << convertion.valeur << name << " grammes" << " is equal to " << gramme_to_livre(convertion) << " livre" << endl;
   else if(a == b + 5 && convertion.prefixe == 3) cout << convertion.valeur << " litre" << " is equal to " << litre_to_gallon(convertion) << " gallon" << endl;
   else if(a == b + 5 && convertion.prefixe != 3) cout << convertion.valeur << name << " litre" << " is equal to " << litre_to_gallon(convertion) << " gallon" << endl;
+  //----------------
   
   cout << endl < endl << "pres ENTER to proceed" << endl;
   while(true) if(GetAsyncKeyState(0x0D)) break;
@@ -899,20 +916,24 @@ void use_predifine_special_convertion_for_dest(int a,int b,char name[10])
   int dest;
   double valeur;
   
+  //-----destination unit selection
   cout << " choose the final unit" << endl;
   if(a == b + 2) dest = sourceTOdest("metre");
   else if(a == b + 4) dest  = sourceTOdest("grammes");
   else dest  = sourceTOdest("litre");
+  //-------
 
   cout << "enter value to be converted" << endl;
-  cin >> valeur;
+  cin >> valeur;// geting the value to be converted
 
+  //----------converting value and displaying result
   if(a == b + 2 && convertion.prefixe == 3) cout << valeur << " milles" << " is equal to " << miles_to_meter(convertion,dest,valeur) << " metre" << endl;
   else if(a == b + 2 && convertion.prefixe != 3) cout << valeur << " milles" << " is equal to " << miles_to_meter(convertion,dest,valeur) << name << " metre" << endl;
   else if(a == b + 4 && convertion.prefixe == 3) cout << valeur << " livre" << " is equal to " << livre_to_gramme(convertion,dest,valeur) << " metre" << endl;
   else if(a == b + 4 && convertion.prefixe != 3) cout << valeur << " livre" << " is equal to " << livre_to_gramme(convertion,dest,valeur) << name << " metre" << endl;
   else if(a == b + 6 && convertion.prefixe == 3) cout << valeur << " livre" << " is equal to " << gallon_to_litre(convertion,dest,valeur) << " metre" << endl;
   else if(a == b + 6 && convertion.prefixe != 3) cout << valeur << " livre" << " is equal to " << gallon_to_litre(convertion,dest,valeur) << name << " metre" << endl;
+  //--------------
   
   cout << endl < endl << "pres ENTER to proceed" << endl;
   while(true) if(GetAsyncKeyState(0x0D)) break;

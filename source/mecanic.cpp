@@ -1,5 +1,4 @@
 #include<math.h>
-#include<iostream>
 #include "../header/mecanic.h"
 
 /*POUR LES CONVERSOINS DE TYPES BASIQUE*/

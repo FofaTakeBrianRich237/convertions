@@ -29,6 +29,7 @@ void upper_case(char word[30])
 }
 
 
+
 /*
 the main menu function 
 messure is an array of messures
@@ -67,6 +68,7 @@ void main_menu(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int
 }
 
 
+
 void add_mesure(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
   int a = 0;
@@ -89,6 +91,7 @@ void add_mesure(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,in
   else add_mesure_special(sp_messure,sp_num_messures);
   main_menu(messure,num_messures,sp_messure,sp_num_messures);
 }
+
 
 
 /*
@@ -140,6 +143,7 @@ void display_messures_simple(MESURE * messure,int &num_messures,SPECIALMESURE * 
 }
 
 
+
 /* 
 fucntoin modify or use a convetion for a certain messure
 char mesure[30] is the messure name
@@ -187,6 +191,7 @@ void modifORuse_simple (MESURE * messure,int &num_messures,char mesure[30],SPECI
 }
 
 
+
 /*
 function to add a new messure for simple convetions
 */
@@ -200,6 +205,7 @@ void add_mesure_simple(MESURE * messure,int &num_messures)
   cin.getline(messure[num_messures].type,30); // to get the type of the messure
   num_messures++;
 }
+
 
 
 /*
@@ -234,6 +240,8 @@ void add_mesure_special(SPECIALMESURE * sp_messure,int &sp_num_messures)
   //------------------
 
 }
+
+
 
 /*
 function for the actual modification of a messure for simple convertions
@@ -284,6 +292,7 @@ void modif_mesure_simple(MESURE * messure,int &num_messures,char mesure[30],SPEC
 
   main_menu(messure,num_messures,sp_messure,sp_num_messures);// to return to main menu
 }
+
 
 
 /*
@@ -377,6 +386,7 @@ void modif_mech_simple(MESURE * messure,int modif,int &num_messures,char mesure[
 }
 
 
+
 /*  
 fucntion to use a simple conetion
 dest is the destination unit
@@ -410,6 +420,7 @@ void use_convert_simple(CONVERTION &convertion,char mesure[30],int & dest)
   while(true) if(GetAsyncKeyState(0x0D)) break;
   //-----------
 }
+
 
 
 /*
@@ -474,6 +485,7 @@ void source_dest_name(char mesure[30],char name[10],int source_dest_value)
 }
 
 
+
 /*
 function to selcet intial and destination unit
 */
@@ -484,6 +496,7 @@ void select_units_simple(char mesure[30],CONVERTION &convertion,int & dest)
   cout << "Select final unit" << endl;
   dest = sourceTOdest(mesure);// to determine final unit
 }
+
 
 
 /*
@@ -531,6 +544,7 @@ int sourceTOdest(char mesure[30])
 }
 
 
+
 /*
 display function
 messure an array for simple messures
@@ -568,6 +582,7 @@ void display_messure(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messu
 
   main_menu(messure,num_messures,sp_messure,sp_num_messures);// to return to the main menu 
 }
+
 
 
 /*
@@ -626,6 +641,8 @@ void display_messure_special(MESURE * messure,int &num_messures,SPECIALMESURE * 
   //-----------------
 }
 
+
+
 /*
 fucntion to modify or use a special convertion
 modif_use store the position of the convertion to use or modify in sp_messure
@@ -671,6 +688,7 @@ void mdoifyORuse_special_messure (MESURE * messure,int &num_messures,SPECIALMESU
   else mdoify_special_messure (messure,num_messures,sp_messure,sp_num_messures,modif_use);// to modify special convertion
   //--------------------
 }
+
 
 
 /*
@@ -856,6 +874,8 @@ if(answer == 'y')
   }
 }
 
+
+
 /*
 function to use predefined special convertion
 */
@@ -875,6 +895,8 @@ void use_predifine_special_convertion(int m,int b)
   //-----------------
   
 }
+
+
 
 /*
 function
@@ -905,6 +927,7 @@ void use_predifine_special_convertion_for_source(int a,int b,char name[10])
   cout << endl < endl << "pres ENTER to proceed" << endl;
   while(true) if(GetAsyncKeyState(0x0D)) break;
 }
+
 
 
 /*

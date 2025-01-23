@@ -14,8 +14,8 @@ enum PREFIX
 
 typedef struct
 {
-	char type[30];
 	char nature[30];
+	char type[30];
 }MESURE;
 
 

@@ -11,7 +11,7 @@ int main()
   SPECIALMESURE * sp_messure;
   int sp_num_messures;
   
-  ifstream file("simple.txt");
+  ifstream file("data/simple.txt");
   char nature[30];
   char type[30];
   for(int i = 0; file >> nature && file >> type; i++)
@@ -21,7 +21,7 @@ int main()
   }
   file.close();
 
-  ifstream file("special.txt");
+  ifstream file("data/special.txt");
   int a, b = 1 ;
   while(file >> a) 
   {
@@ -30,7 +30,6 @@ int main()
     b++;
   }
   file.close();
-
   main_menu(messure,num_messures,sp_messure,sp_num_messures);
   return 0;
 }

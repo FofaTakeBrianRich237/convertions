@@ -647,7 +647,7 @@ void display_messure_special(MESURE * messure,int &num_messures,SPECIALMESURE * 
 fucntion to modify or use a special convertion
 modif_use store the position of the convertion to use or modify in sp_messure
 */
-void mdoifyORuse_special_messure (MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures,int modif_use)
+void mdoifyORuse_special_messure (MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures,int modif_use)/////////
 {
   int a = 0;
 

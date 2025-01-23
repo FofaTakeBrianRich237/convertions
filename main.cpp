@@ -21,7 +21,7 @@ int main()
   }
   file.close();
 
-  ifstream file("data/special.txt");
+  ifstream filed("data/special.txt");
   int a, b = 1 ;
   while(file >> a) 
   {
@@ -29,7 +29,7 @@ int main()
     else num_messures = a;
     b++;
   }
-  file.close();
+  filed.close();
   main_menu(messure,num_messures,sp_messure,sp_num_messures);
   return 0;
 }

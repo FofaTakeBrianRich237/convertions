@@ -1,6 +1,7 @@
 #ifndef __MENU_SYS_H_
 #define __MENU_SYS_H_
 
+#include "mecanic.h"
 
 void main_menu(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures);
 void display_messures_simple(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures);

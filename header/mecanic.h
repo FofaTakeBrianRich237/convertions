@@ -54,4 +54,7 @@ double livre_to_gramme(CONVERTION &convertion, int dest, double valeur);
 double litre_to_gallon(CONVERTION &convertion);
 double gallon_to_litre(CONVERTION &convertion, int dest, double valeur);
 
+/*CONVERTION SPECIALE AJOUTEE PAR L'UTILISATEUR*/
+double special_convert(SPECIALMESURE &specialmesure, double valeur);
+
 #endif

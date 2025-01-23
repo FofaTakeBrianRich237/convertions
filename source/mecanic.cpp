@@ -410,3 +410,36 @@ double gallon_to_litre(CONVERTION &convertion, int dest, double valeur)
     }
     return convert;  
 }
+
+/*CONVERTION SPECIALE AJOUTEE PAR L'UTILISATEUR*/
+double special_convert(SPECIALMESURE &specialmesure, double valeur)
+{
+    double specialConvert = 0.0f;
+    switch(specialmesure.sign_to_use)
+    {
+        case 1: //do a simple addition with define constant
+        {
+            specialConvert = valeur+specialmesure.constant;
+            break;
+        }
+
+        case 2: //do a simple soustraction with define constant
+        {
+            spacialConvert = valeur-specialmesure.constant;
+            break;
+        }
+
+        case 3: //do a simple multiplication with define constant
+        {
+            spacialConvert = valeur*specialmesure.constant;
+            break;
+        }
+
+        case 4: //do a simple division with define constant 
+        {
+            spacialConvert = valeur/specialmesure.constant;
+            break;
+        }
+    }
+    return specialConvert;
+}

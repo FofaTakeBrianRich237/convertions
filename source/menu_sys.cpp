@@ -48,12 +48,14 @@ void main_menu(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int
     // -------------- input collection from keyboard
     if(GetAsyncKeyState(0x26))  
     {
+      cout << "\a";
       if(a == 0) a = 2;
       else if (a == 1) a = 0;
       else  a = 1;
     }
     if(GetAsyncKeyState(0x28))  
     { 
+      cout << "\a";
       if(a == 0) a = 1;
       else if (a == 1) a = 2;
       else a = 0;
@@ -68,7 +70,9 @@ void main_menu(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int
 }
 
 
-
+/*
+fucntion to add a simple messure or a special convertion
+*/
 void add_mesure(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
   int a = 0;
@@ -77,6 +81,7 @@ void add_mesure(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,in
     system("cls");
     if( GetAsyncKeyState(0X26) || GetAsyncKeyState(0X28))
     {
+      cout << "\a";
       if(a == 0) a = 1;
       else a = 0;
     }
@@ -107,11 +112,13 @@ void display_messures_simple(MESURE * messure,int &num_messures,SPECIALMESURE * 
     system("cls");
     if(GetAsyncKeyState(0x26))
     {
+      cout << "\a";
       if(a == 0) a = num_messures + 1;
       else a -= 1;
     }
     if(GetAsyncKeyState(0x28))
     {
+      cout << "\a";
       if(a == num_messures + 1) a = 0;
       else a += 1;
     }
@@ -158,6 +165,7 @@ void modifORuse_simple (MESURE * messure,int &num_messures,char mesure[30],SPECI
     //-----choice input mechanicsm
     if(GetAsyncKeyState(0x26))
     {
+      cout << "\a";
       if(a == 0) a = 3;
       else if(a == 1) a = 0;
       else if(a == 2) a = 1;
@@ -165,6 +173,7 @@ void modifORuse_simple (MESURE * messure,int &num_messures,char mesure[30],SPECI
     }
     if(GetAsyncKeyState(0x28))
     {
+      cout << "\a";
       if(a == 0) a = 1;
       else if(a == 1) a = 2;
       else if(a == 2) a = 3;
@@ -255,11 +264,13 @@ void modif_mesure_simple(MESURE * messure,int &num_messures,char mesure[30],SPEC
     //---------input collection
     if(GetAsyncKeyState(0x26))
     {
+      cout << "\a";
       if(a == 0) a = num_messures + 1;
       else a -= 1;
     }
     if(GetAsyncKeyState(0x28))
     {
+      cout << "\a";
       if(a == num_messures + 1) a = 0;
       else a += 1;
     }
@@ -359,12 +370,14 @@ void modif_mech_simple(MESURE * messure,int modif,int &num_messures,char mesure[
     //--------input collections for choice navigation
     if(GetAsyncKeyState(0x25))
     {
+      cout << "\a";
       if(b == 0) b = 2;
       else if(b == 1) b = 0;
       else b = 1;
     }
     if(GetAsyncKeyState(0x27))
     {
+      cout << "\a";
       if(b == 0) b = 1;
       else if (b == 1) b = 2;
       else b = 0;
@@ -381,7 +394,7 @@ void modif_mech_simple(MESURE * messure,int modif,int &num_messures,char mesure[
     if(nature_modif) messure[modif].nature == inter_nature;// save changes made to the nature name
     if(type_modif) messure[modif].type == inter_type; // save changes made to th type name
   }
-  else if(b == 1) modif_mech_simple(messure,modif,num_messures,mesure);// do not save change and recalls the fucntion itself
+  else if(b == 1) modif_mech_simple(messure,modif,num_messures,mesure,sp_messure,sp_num_messures);// do not save change and recalls the fucntion itself
   else modif_mesure_simple(messure,num_messures,mesure,sp_messure,sp_num_messures); //return backward
 }
 
@@ -512,11 +525,13 @@ int sourceTOdest(char mesure[30])
     //------------input colletion
     if(GetAsyncKeyState(0x26)) 
     {
+      cout << "\a";
       if(a == 0) a = 6;
       else a -= 1;
     }
     if(GetAsyncKeyState(0x28)) 
     {
+      cout << "\a";
       if(a == 6) a == 0;
       else a += 1;
     }
@@ -562,6 +577,7 @@ void display_messure(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messu
     //--------------input collction
     if(GetAsyncKeyState(0x26) || GetAsyncKeyState(0x28)) 
     {
+      cout << "\a";
       if(a == 0) a = 1;
       else a = 0;
     } 
@@ -597,11 +613,13 @@ void display_messure_special(MESURE * messure,int &num_messures,SPECIALMESURE * 
     //---------input collection
     if(GetAsyncKeyState(0x26))
     {
+      cout << "\a";
       if(a == 0) a = sp_num_messures + 6;
       else a -= 1;
     }
     if(GetAsyncKeyState(0x28))
     {
+      cout << "\a";
       if(a == sp_num_messures + 6) a = 0;
       else a += 1;
     }
@@ -647,7 +665,7 @@ void display_messure_special(MESURE * messure,int &num_messures,SPECIALMESURE * 
 fucntion to modify or use a special convertion
 modif_use store the position of the convertion to use or modify in sp_messure
 */
-void mdoifyORuse_special_messure (MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures,int modif_use)/////////
+void mdoifyORuse_special_messure (MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures,int modif_use)
 {
   int a = 0;
 
@@ -657,6 +675,7 @@ void mdoifyORuse_special_messure (MESURE * messure,int &num_messures,SPECIALMESU
     //-----choice input mechanicsm
     if(GetAsyncKeyState(0x26))
     {
+      cout << "\a";
       if(a == 0) a = 3;
       else if(a == 1) a = 0;
       else if(a == 2) a = 1;
@@ -664,6 +683,7 @@ void mdoifyORuse_special_messure (MESURE * messure,int &num_messures,SPECIALMESU
     }
     if(GetAsyncKeyState(0x28))
     {
+      cout << "\a";
       if(a == 0) a = 1;
       else if(a == 1) a = 2;
       else if(a == 2) a = 3;
@@ -841,12 +861,14 @@ if(answer == 'y')
     system("cls");
     if(GetAsyncKeyState(0x26)) 
     {
+      cout << "\a";
       if(a == 0) a = 2;
       else if(a == 1) a = 0;
       else a = 1;
     }
     if(GetAsyncKeyState(0x26)) 
     {
+      cout << "\a";
       if(a == 0) a = 1;
       else if(a == 1) a = 2;
       else a = 0;
@@ -885,8 +907,8 @@ void use_predifine_special_convertion(int m,int b)
 
   //------------ffilling the unit name in name
   if(m == b + 1 || m == b + 2) source_dest_name("metre",name,sourceTOdest("metre")); // in case its from or to metre convetion
-  else if(m == b + 3 || a == b + 4) source_dest_name("gramme",name,sourceTOdest("gramme")); // in case its from or to gramme convetion
-  else if(m == b + 5 || a == b + 6) source_dest_name("litre",name,sourceTOdest("litre")); // in case its from or to litre convetion
+  else if(m == b + 3 || m == b + 4) source_dest_name("gramme",name,sourceTOdest("gramme")); // in case its from or to gramme convetion
+  else if(m == b + 5 || m == b + 6) source_dest_name("litre",name,sourceTOdest("litre")); // in case its from or to litre convetion
   //------------
 
   //--------------function calls depending on the special convertion choiced

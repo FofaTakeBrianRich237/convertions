@@ -22,7 +22,8 @@ int main()
   ofs.close();
 
   ifstream filed("data/size.txt");
-  int a, b = 1 ;
+  int a;
+  b = 1 ;
   while(filed >> a) 
   {
     if(b == 1) sp_num_messures = a;

@@ -1,11 +1,13 @@
 #include "header/menu_sys.h"
 #include "header/mecanic.h"
 #include<fstream>
+#include<iostream>
 using namespace std;
 
 
 int main()
 {
+
   int b;
   MESURE * messure = (MESURE*) malloc(sizeof(MESURE) * b);
   SPECIALMESURE * sp_messure = (SPECIALMESURE*) malloc(sizeof(SPECIALMESURE) * b);
@@ -39,14 +41,14 @@ int main()
   ofstream files("data/simple.txt");
   for(int i = 0; i < num_messures; i++)
   {
-    files << messure[i].nature << messure[i].type << endl;
+    files << messure[i].nature <<" "<< messure[i].type << endl;
   }
   files.close();
 
   ofstream ofss("data/special.txt");
   for(int i = 0; i < sp_num_messures; i++)
   {
-    ofss << sp_messure[i].con_name << sp_messure[i].type << sp_messure[i].nature << sp_messure[i].intial_unit << sp_messure[i].final_unit << sp_messure[i].sign_to_use << sp_messure[i].constant << endl;
+    ofss << sp_messure[i].con_name <<" " <<sp_messure[i].type <<" "<< sp_messure[i].nature <<" "<< sp_messure[i].intial_unit <<" "<< sp_messure[i].final_unit <<" "<< sp_messure[i].sign_to_use <<" "<< sp_messure[i].constant <<" "<< endl;
   }
   ofss.close();
 

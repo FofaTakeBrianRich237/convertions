@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string.h>
+#include <cstring>
 #include <typeinfo>
 #include "../header/menu_sys.h"
 #include "../header/mecanic.h"
@@ -14,8 +14,12 @@ using namespace std;
 function to change all laters in a word to uppercase leter
 char word[30] is the word to be put in capital
 */ 
+//1
+
 void upper_case(char word[30])
 {
+  cout << "1" << endl;
+  Sleep(1000);
   char capps[30]; // will contain word in capital
     for(int i = 0; word[i] != '\0'; i++) // cross checking the word for non capital letters
     {
@@ -25,7 +29,7 @@ void upper_case(char word[30])
         }
         else capps[i] = word[i];
     }
-    std::cout << "\033[31m" << capps<< "\033[37m" << std::endl;  // to display word in capital and in red color
+    std::cout << "\033[31m" << capps<< "\033[37m";  // to display word in capital and in red color
 }
 
 
@@ -35,8 +39,11 @@ the main menu function
 messure is an array of messures
 num_messures is the number of messures store in messure
 */
+//2
 void main_menu(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
+  cout << "2" << endl;
+  Sleep(1000);
   system("cls");
   int  a = 0;
   while(true)// display of choices
@@ -73,8 +80,11 @@ void main_menu(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int
 /*
 fucntion to add a simple messure or a special convertion
 */
+//3
 void add_mesure(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
+  cout << "3" << endl;
+  Sleep(1000);
   int a = 0;
   while (true)
   {
@@ -102,8 +112,11 @@ void add_mesure(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,in
 /*
 fucntion to display simple messures convetions
 */
+//4
 void display_messures_simple(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
+  cout << "4" << endl;
+  Sleep(1000);
   system("cls");
   int a = 0; // use to determine choice
   while (true)
@@ -155,8 +168,11 @@ void display_messures_simple(MESURE * messure,int &num_messures,SPECIALMESURE * 
 fucntoin modify or use a convetion for a certain messure
 char mesure[30] is the messure name
 */
+//5
 void modifORuse_simple (MESURE * messure,int &num_messures,char mesure[30],SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
+  cout << "5" << endl;
+  Sleep(1000);
   int a = 0,dest = 0; // dest for destionation messure and source for intial messure in case we are to do a convertion
   CONVERTION convertion;
   while(true)
@@ -204,8 +220,11 @@ void modifORuse_simple (MESURE * messure,int &num_messures,char mesure[30],SPECI
 /*
 function to add a new messure for simple convetions
 */
+//6
 void add_mesure_simple(MESURE * messure,int &num_messures)
 {
+  cout << "6" << endl;
+  Sleep(1000);
   system("cls");
   int a = 0;
   cout << "Enter the nature" << endl;
@@ -216,7 +235,7 @@ void add_mesure_simple(MESURE * messure,int &num_messures)
 }
 
 
-
+//7
 /*
 function to add a new special convert
 sp_messures is an array of th SPECIALMESURE type 
@@ -224,6 +243,8 @@ sp_numesseres stores the number of elements in sp_messure
 */
 void add_mesure_special(SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
+  cout << "7" << endl;
+  Sleep(1000);
   cout << "Enter the convetion name" << endl;
   cin.getline(sp_messure[sp_num_messures].con_name,30); // geting the special convertion's name
   cout << "Enter the nature" << endl; 
@@ -251,12 +272,14 @@ void add_mesure_special(SPECIALMESURE * sp_messure,int &sp_num_messures)
 }
 
 
-
+//8
 /*
 function for the actual modification of a messure for simple convertions
 */
 void modif_mesure_simple(MESURE * messure,int &num_messures,char mesure[30],SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
+  cout << "8" << endl;
+  Sleep(1000);
   int a = 0;
   while (true)// display of existing messures store in the messure array
   {
@@ -287,11 +310,12 @@ void modif_mesure_simple(MESURE * messure,int &num_messures,char mesure[30],SPEC
         upper_case(messure[i].type);
         cout << endl;
       }
-     else cout << messure[i].nature << endl << "  " << messure[i].type;  
+     else cout << messure[i].nature  << "  " << messure[i].type << endl;  
     }
     if(a == num_messures) cout << "\033[31m" << "BACK" << "\033[37m" << endl << "back to menu";
     else if(a == num_messures + 1) cout << "back" << endl <<"\033[31m" << "BACK TO MENU" << "\033[37m" << endl;
     else cout << "back" << endl << "back to menu" << endl;
+
     Sleep(100);
   }
 
@@ -305,18 +329,20 @@ void modif_mesure_simple(MESURE * messure,int &num_messures,char mesure[30],SPEC
 }
 
 
-
+//9
 /*
 function for the modification mechanism
 modif is the positon in the messure array that contains to messure to be modified
 */
 void modif_mech_simple(MESURE * messure,int modif,int &num_messures,char mesure[30],SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
+  cout << "9" << endl;
+  Sleep(1000);
   system("cls");
   int b = 0;// to nevigate over chioces
   char answer = 'n';// to collects response on which parameter to be changed
-  char inter_nature[30];// variable to temporarily store the new nature name
-  char inter_type[30];// variable to temporarily store the new type name
+  char inter_nature[30] = {};// variable to temporarily store the new nature name
+  char inter_type[30] = {};// variable to temporarily store the new type name
   bool nature_modif = false,type_modif = false; // to determine if yes or no modification a to be made to a given parameter
   cout << "Do you want to change the nature name ? (y/n)" << endl;
   
@@ -357,8 +383,8 @@ void modif_mech_simple(MESURE * messure,int modif,int &num_messures,char mesure[
     cin.getline(inter_type,30);
   }
 
-
-  while (true)// selection of an action to be done
+  bool g = true;
+  while (g)// selection of an action to be done
   {
     system("cls");
     //-----------display of possible actions
@@ -399,7 +425,7 @@ void modif_mech_simple(MESURE * messure,int modif,int &num_messures,char mesure[
 }
 
 
-
+//10
 /*  
 fucntion to use a simple conetion
 dest is the destination unit
@@ -408,6 +434,8 @@ prefix store the different prefixes for convetions
 */
 void use_convert_simple(CONVERTION &convertion,char mesure[30],int & dest)
 {
+  cout << "10" << endl;
+  Sleep(1000);
   system("cls");
   
   
@@ -425,23 +453,31 @@ void use_convert_simple(CONVERTION &convertion,char mesure[30],int & dest)
   
   //----to display the answer of the convetions
     //Basic_convet is the function that dose the convetion
+  system("cls");
   cout << "Convertion made" << endl << endl;
   if(convertion.prefixe !=3 && dest != 3) cout << convertion.valeur << source_name << " " << mesure << " " << "is equal to " << Basic_convert(convertion,dest) << " " << dest_name << " " << mesure << endl;
   else if(convertion.prefixe == 3 && dest != 3) cout << convertion.valeur << " " << mesure << " " << "is equal to " << Basic_convert(convertion,dest) << " " << dest_name << " " << mesure << endl;
   else if(convertion.prefixe != 3 && dest == 3) cout << convertion.valeur << source_name << " " << mesure << " " << "is equal to " << Basic_convert(convertion,dest) << " " << mesure << endl;
   else cout << convertion.valeur << " " << mesure << " " << "is equal to " << Basic_convert(convertion,dest) << " " << mesure << endl;
-  while(true) if(GetAsyncKeyState(0x0D)) break;
+  cout << endl << "press enter to proceed" << endl;
+  int a = 0;
+  for( ;GetAsyncKeyState(0x0D); )
+  {
+    cout << " hum" << endl;
+  }
   //-----------
 }
 
 
-
+//11
 /*
 function for the source and destination unit names assignation
 source_dest_value is the value that represents a unit in the the convertion enumeration
 */
 void source_dest_name(char mesure[30],char name[10],int source_dest_value)
 {
+  cout << "11" << endl;
+  Sleep(1000);
   if (source_dest_value == 0) 
   {
     name[0] = 'K';
@@ -498,12 +534,14 @@ void source_dest_name(char mesure[30],char name[10],int source_dest_value)
 }
 
 
-
+//12
 /*
 function to selcet intial and destination unit
 */
 void select_units_simple(char mesure[30],CONVERTION &convertion,int & dest)
 {
+  cout << "12" << endl;
+  Sleep(1000);
   cout << "Select initial unit" << endl;
   convertion.prefixe = (PREFIX)sourceTOdest(mesure); // to initialise source unit
   cout << "Select final unit" << endl;
@@ -511,12 +549,14 @@ void select_units_simple(char mesure[30],CONVERTION &convertion,int & dest)
 }
 
 
-
+//13
 /*
 function for the selcetion of the unit
 */
 int sourceTOdest(char mesure[30])
 {
+  cout << "13" << endl;
+  Sleep(1000);
   system("cls");
   int a = 0;
   while(true)
@@ -559,7 +599,7 @@ int sourceTOdest(char mesure[30])
 }
 
 
-
+//14
 /*
 display function
 messure an array for simple messures
@@ -569,6 +609,8 @@ sp_num_messures the number of special convertions stored in sp_messure
 */
 void display_messure(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
+  cout << "14" << endl;
+  Sleep(1000);
   system("cls");
   int a = 0;
   while(true) // choice making
@@ -585,8 +627,8 @@ void display_messure(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messu
     //---------------
 
     //-------------function calls depending on choice made 
-    if(a == 1) cout << "SIMPLE MESSUREMENTS" << endl << "special messurements" << endl; // to dislay simple messure
-    else cout << "simple messurements" << endl << "SPECIAL MESSUREMENTS" << endl; // to dislay special messure
+    if(a == 0) cout <<"\033[31m" << "SIMPLE MESSUREMENTS" << "\033[37m" << endl << "special messurements" << endl; // to dislay simple messure
+    else cout << "simple messurements" << endl << "\033[31m" <<"SPECIAL MESSUREMENTS" << "\033[37m" << endl; // to dislay special messure
     //----------
     Sleep(100);
   }
@@ -600,12 +642,14 @@ void display_messure(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messu
 }
 
 
-
+//15
 /*
 functino to diaplY spcecial convetions
 */
 void display_messure_special(MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures)
 {
+  cout << "15" << endl;
+  Sleep(1000);
   int a = sp_num_messures + 5; // variable for navigation over and choice of convetion
   while (true)
   {
@@ -660,13 +704,15 @@ void display_messure_special(MESURE * messure,int &num_messures,SPECIALMESURE * 
 }
 
 
-
+//16
 /*
 fucntion to modify or use a special convertion
 modif_use store the position of the convertion to use or modify in sp_messure
 */
 void mdoifyORuse_special_messure (MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures,int modif_use)
 {
+  cout << "16" << endl;
+  Sleep(1000);
   int a = 0;
 
   while(true)
@@ -710,12 +756,14 @@ void mdoifyORuse_special_messure (MESURE * messure,int &num_messures,SPECIALMESU
 }
 
 
-
+//17
 /*
 fucntion to modify a special convertion
 */
 void mdoify_special_messure (MESURE * messure,int &num_messures,SPECIALMESURE * sp_messure,int &sp_num_messures,int modif)
 {
+  cout << "17" << endl;
+  Sleep(1000);
   system("cls");
   //-------intermidiate variable definitions
   char temp_con_name[30]; // store name 
@@ -897,19 +945,15 @@ if(answer == 'y')
 }
 
 
-
+//18
 /*
 function to use predefined special convertion
 */
 void use_predifine_special_convertion(int m,int b)
 {
+  cout << "18" << endl;
+  Sleep(1000);
   char name[10];// to store the source or destination unit name
-
-  //------------ffilling the unit name in name
-  if(m == b + 1 || m == b + 2) source_dest_name("metre",name,sourceTOdest("metre")); // in case its from or to metre convetion
-  else if(m == b + 3 || m == b + 4) source_dest_name("gramme",name,sourceTOdest("gramme")); // in case its from or to gramme convetion
-  else if(m == b + 5 || m == b + 6) source_dest_name("litre",name,sourceTOdest("litre")); // in case its from or to litre convetion
-  //------------
 
   //--------------function calls depending on the special convertion choiced
   if(m == b + 1 || m == b + 3  || m == b + 5)  use_predifine_special_convertion_for_source(m,b,name);
@@ -919,19 +963,24 @@ void use_predifine_special_convertion(int m,int b)
 }
 
 
-
+//19
 /*
 function
 */
 void use_predifine_special_convertion_for_source(int a,int b,char name[10])
 {
+  cout << "19" << endl;
+  Sleep(1000);
   CONVERTION convertion;
   cout << "choose unit"  << endl;
-
+  char name1[30];
+  char name2[30];
+  char name3[30];
+  initialise_names(name1,name2,name3);
   //--------source unit selection
-  if(a == b + 1) convertion.prefixe = (PREFIX)sourceTOdest("metre");
-  else if(a == b + 3) convertion.prefixe = (PREFIX)sourceTOdest("grammes");
-  else convertion.prefixe = (PREFIX)sourceTOdest("litre");
+  if(a == b + 1) convertion.prefixe = (PREFIX)sourceTOdest(name1);
+  else if(a == b + 3) convertion.prefixe = (PREFIX)sourceTOdest(name2);
+  else convertion.prefixe = (PREFIX)sourceTOdest(name3);
   //----------
 
   cout << "enter value to be converted" << endl;
@@ -951,12 +1000,14 @@ void use_predifine_special_convertion_for_source(int a,int b,char name[10])
 }
 
 
-
+//20
 /*
 fucntion 
 */
 void use_predifine_special_convertion_for_dest(int a,int b,char name[10])
 {
+  cout << "20" << endl;
+  Sleep(1000);
   CONVERTION convertion;
   int dest;
   double valeur;
@@ -988,12 +1039,14 @@ void use_predifine_special_convertion_for_dest(int a,int b,char name[10])
   while(true) if(GetAsyncKeyState(0x0D)) break;
 }
 
-
+//21
 /*
 function to use a non predifined special convertion
 */
 void use_special_convertion(SPECIALMESURE sp_messure)
 {
+  cout << "21" << endl;
+  Sleep(1000);
   double valeur; // to store value to be converted
   cout << "enter value" << endl;
   cin >> valeur; // geting value
@@ -1003,9 +1056,12 @@ void use_special_convertion(SPECIALMESURE sp_messure)
   while(true) if(GetAsyncKeyState(0x0D)) break;
 }
 
+//22
 
 void initialise_names(char name[30],char name1[30],char name2[30])
 {
+  cout << "22" << endl;
+  Sleep(1000);
   name[0] = 'm';
   name[1] = 'e';
   name[2] = 't';

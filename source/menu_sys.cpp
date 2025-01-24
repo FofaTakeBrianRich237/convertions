@@ -963,9 +963,13 @@ void use_predifine_special_convertion_for_dest(int a,int b,char name[10])
   
   //-----destination unit selection
   cout << " choose the final unit" << endl;
-  if(a == b + 2) dest = sourceTOdest("metre");
-  else if(a == b + 4) dest  = sourceTOdest("grammes");
-  else dest  = sourceTOdest("litre");
+  char name1[30];
+  char name2[30];
+  char name3[30];
+  initialise_names(name1,name2,name3);
+  if(a == b + 2) dest = sourceTOdest(name1);
+  else if(a == b + 4) dest  = sourceTOdest(name2);
+  else dest  = sourceTOdest(name3);
   //-------
 
   cout << "enter value to be converted" << endl;
@@ -997,4 +1001,27 @@ void use_special_convertion(SPECIALMESURE sp_messure)
 
   cout << endl << endl << "pres ENTER to proceed" << endl;
   while(true) if(GetAsyncKeyState(0x0D)) break;
+}
+
+
+void initialise_names(char name[30],char name1[30],char name2[30])
+{
+  name[0] = 'm';
+  name[1] = 'e';
+  name[2] = 't';
+  name[3] = 'r';
+  name[4] = 'e';
+
+  name1[0] = 'g';
+  name1[1] = 'r';
+  name1[2] = 'a';
+  name1[3] = 'm';
+  name1[4] = 'm';
+  name1[5] = 'e';
+
+  name2[0] = 'l';
+  name2[1] = 'i';
+  name2[2] = 't';
+  name2[3] = 'r';
+  name2[4] = 'e';
 }

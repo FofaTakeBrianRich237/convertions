@@ -30,5 +30,6 @@ void use_predifine_special_convertion(int m,int b);
 void use_predifine_special_convertion_for_source(int a,int b,char name[10]);
 void use_predifine_special_convertion_for_dest(int a,int b,char name[10]);
 void use_special_convertion(SPECIALMESURE sp_messure);
+void initialise_names(char name[30],char name1[30],char name2[30]);
 
 #endif

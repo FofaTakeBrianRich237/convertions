@@ -4,6 +4,9 @@
 #include "../header/menu_sys.h"
 #include "../header/mecanic.h"
 #include<fstream>
+#include<ios>
+#include<limits>
+#include<limits.h>
 #include <windows.h>
 using namespace std;
 
@@ -228,8 +231,10 @@ void add_mesure_simple(MESURE * messure,int &num_messures)
   system("cls");
   int a = 0;
   cout << "Enter the nature" << endl;
+  cin.ignore(numeric_limits<streamsize>::max());
   cin.getline(messure[num_messures].nature,30);// to get the nature 
   cout << "Enter the type" << endl;
+  cin.ignore(numeric_limits<streamsize>::max());
   cin.getline(messure[num_messures].type,30); // to get the type of the messure
   num_messures++;
 }
@@ -246,25 +251,33 @@ void add_mesure_special(SPECIALMESURE * sp_messure,int &sp_num_messures)
   cout << "7" << endl;
   Sleep(1000);
   cout << "Enter the convetion name" << endl;
+  cin.ignore();
   cin.getline(sp_messure[sp_num_messures].con_name,30); // geting the special convertion's name
   cout << "Enter the nature" << endl; 
+  cin.ignore();
   cin.getline(sp_messure[sp_num_messures].nature,30); // geting the nature name 
   cout << "Enter the type" << endl;
+  cin.ignore();
   cin.getline(sp_messure[sp_num_messures].type,30); // geting the type name
   cout << "Enter the initial unit" << endl; 
+  cin.ignore();
   cin.getline(sp_messure[sp_num_messures].intial_unit,30); // geting the initial unit
   cout << "Enter the final unit" << endl;
+  cin.ignore();
   cin.getline(sp_messure[sp_num_messures].final_unit,30); // geting the final unit 
   cout << "Enter the constant for the convertion" << endl;
+  // cin.ignore();
   cin >> sp_messure[sp_num_messures].constant; // geting the constant for the convertion
   cout << "Enter the sign to be used on the constant" << endl;
   cout << "Enter:" << endl << "1  for addition" << endl << "2 for substraction" << endl << "3 for multiplication" << endl << "4 for division" << endl;
+  // cin.ignore();
   cin >> sp_messure[sp_num_messures].sign_to_use; // geting the sign to be used with the constant upon the values to be cnverted
   //--------------checking validity of the sign choiced
   while (!( sp_messure[sp_num_messures].sign_to_use >= 1 && sp_messure[sp_num_messures].sign_to_use <= 4)) 
   {
     cout << "Invalid entry" << endl;
     cout << "Enter:" << endl << "1  for addition" << endl << "2 for substraction" << endl << "3 for multiplication" << endl << "4 for division" << endl;
+    // cin.ignore();
     cin >> sp_messure[sp_num_messures].sign_to_use;
   }
   //------------------
@@ -347,10 +360,12 @@ void modif_mech_simple(MESURE * messure,int modif,int &num_messures,char mesure[
   cout << "Do you want to change the nature name ? (y/n)" << endl;
   
   //--------answer colletion(y/n)
+  // cin.ignore();
   cin >> answer;
   while (answer != 'y' && answer != 'n') 
   {
     cout << "Enter 'y' for yes and 'n' for no" << endl;
+    // cin.ignore();
     cin >> answer;
   }
   //--------
@@ -360,6 +375,7 @@ void modif_mech_simple(MESURE * messure,int modif,int &num_messures,char mesure[
   {
     nature_modif = true;
     cout << "Enter new nature name" << endl;
+    cin.ignore();
     cin.getline(inter_nature,30);
   }
   //-------------
@@ -367,10 +383,12 @@ void modif_mech_simple(MESURE * messure,int modif,int &num_messures,char mesure[
   cout << "Do you want to change the type name ? (y/n)"  << endl;
 
   //----------answer collection(y/n)
+  // cin.ignore();
   cin >> answer;
   while (answer != 'y' && answer != 'n') 
   {
     cout << "Enter 'y' for yes and 'n' for no" << endl;
+    // cin.ignore();
     cin >> answer;
   }
   //--------
@@ -379,12 +397,12 @@ void modif_mech_simple(MESURE * messure,int modif,int &num_messures,char mesure[
   if(answer == 'y') 
   {
     type_modif = true;
-    cout << "Enter new nature name" << endl;
+    cout << "Enter new type  name" << endl;
+    cin.ignore();
     cin.getline(inter_type,30);
   }
 
-  bool g = true;
-  while (g)// selection of an action to be done
+  while (true)// selection of an action to be done
   {
     system("cls");
     //-----------display of possible actions
@@ -393,7 +411,7 @@ void modif_mech_simple(MESURE * messure,int modif,int &num_messures,char mesure[
     else cout << "save" << "  " << "edit" << "  " << "\033[31m" << "BACK" << "\033[37m" << endl;
     //----------
 
-    //--------input collections for choice navigation
+    //--------inpu collections for choice navigation
     if(GetAsyncKeyState(0x25))
     {
       cout << "\a";
@@ -434,23 +452,21 @@ prefix store the different prefixes for convetions
 */
 void use_convert_simple(CONVERTION &convertion,char mesure[30],int & dest)
 {
-  cout << "10" << endl;
+  cout << "10" << endl; // manual 
   Sleep(1000);
   system("cls");
-  
-  
+
   char source_name[10];// source unit
   char dest_name[10];// destination unit 
   
-  select_units_simple(mesure,convertion,dest); // destination and source unit selection
-  
+  select_units_simple(mesure,convertion,dest); // destination and source unit selection  
   cout << "enter value" << endl;
+  // cin.ignore();
   cin >> convertion.valeur;
   //--------assignation of source and destionation units nae=me
   source_dest_name(mesure,source_name,convertion.prefixe);
-  source_dest_name(mesure,dest_name,convertion.prefixe);
+  source_dest_name(mesure,dest_name,dest);
   //----------
-  
   //----to display the answer of the convetions
     //Basic_convet is the function that dose the convetion
   system("cls");
@@ -459,12 +475,11 @@ void use_convert_simple(CONVERTION &convertion,char mesure[30],int & dest)
   else if(convertion.prefixe == 3 && dest != 3) cout << convertion.valeur << " " << mesure << " " << "is equal to " << Basic_convert(convertion,dest) << " " << dest_name << " " << mesure << endl;
   else if(convertion.prefixe != 3 && dest == 3) cout << convertion.valeur << source_name << " " << mesure << " " << "is equal to " << Basic_convert(convertion,dest) << " " << mesure << endl;
   else cout << convertion.valeur << " " << mesure << " " << "is equal to " << Basic_convert(convertion,dest) << " " << mesure << endl;
-  cout << endl << "press enter to proceed" << endl;
-  int a = 0;
-  for( ;GetAsyncKeyState(0x0D); )
-  {
-    cout << " hum" << endl;
-  }
+ 
+  cout << endl << endl << "pres any leter to proceed" << endl;
+  char c;
+  // cin.ignore();
+  cin >> c;
   //-----------
 }
 
@@ -677,7 +692,7 @@ void display_messure_special(MESURE * messure,int &num_messures,SPECIALMESURE * 
     else if(a == sp_num_messures + 3) cout << "meter to miles" << endl << "miles to meter" << endl << "\033[31m" <<"GRAMMES TO LIVRE" << "\033[37m" << endl << "livre to grames" << endl << "litre to gallon" << endl << "gallon ot litre" << endl;
     else if(a == sp_num_messures + 4) cout << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "\033[31m" <<"LIVRE TO GRAMMES" << "\033[37m" << endl << "litre to gallon" << endl << "gallon ot litre" << endl;
     else if(a == sp_num_messures + 5) cout << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "\033[31m" <<"LITRE TO GALLON" << "\033[37m" << endl << "gallon ot litre" << endl;
-    else if(a == sp_num_messures + 6) cout << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "litre to gallon" << endl << "\033[31m" << "GALLON TO LITRE" << "\033[73m" << endl;
+    else if(a == sp_num_messures + 6) cout << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "litre to gallon" << endl << "\033[31m" << "GALLON TO LITRE" << "\033[37m" << endl;
     else cout << "meter to miles" << endl << "miles to meter" << endl << "grammes to livre" << endl << "livre to grames" << endl << "litre to gallon" << endl << "gallon to litre" << endl;
       //---------
       //---------display of special convertions that have been added by users
@@ -782,28 +797,33 @@ void mdoify_special_messure (MESURE * messure,int &num_messures,SPECIALMESURE * 
   //---------------------geting the answers and the setting up the intermidiate variable(ici je suis deja tired louis tu vas flex de tout facon)
   cout << "Answer yes or no please (y/n)" << endl << endl;
   cout << "Do yo want to modify the convertion name" << endl;
+  // cin.ignore();
   cin >> answer;
   while (answer != 'n' && answer != 'y')
   {
     cout << "invalid choice" << endl;
     cout << "Answer yes or no please (y/n)" << endl << endl;
     cout << "Do yo want to modify the convertion name" << endl;
+    // cin.ignore();
     cin >> answer;
   }
   if(answer == 'y')
   {
     ifname = true;
     cout << "enter the new convertion name" << endl;
+    cin.ignore();
     cin.getline(temp_con_name,30);
   }
 
   cout << "Do yo want to modify the nature name" << endl;
+  // cin.ignore();
   cin >> answer;
   while (answer != 'n' && answer != 'y')
   {
     cout << "invalid choice" << endl;
     cout << "Answer yes or no please (y/n)" << endl << endl;
     cout << "Do yo want to modify the nature name" << endl;
+    // cin.ignore();
     cin >> answer;
   }
 
@@ -811,11 +831,13 @@ void mdoify_special_messure (MESURE * messure,int &num_messures,SPECIALMESURE * 
   {
     ifnature = true;
     cout << "enter the new nature name" << endl;
+    cin.ignore();
     cin.getline(temp_nature,30);
   }
 
 
   cout << "Do yo want to modify the type name" << endl;
+  // cin.ignore();
   cin >> answer;
   while (answer != 'n' && answer != 'y')
   {
@@ -823,81 +845,96 @@ void mdoify_special_messure (MESURE * messure,int &num_messures,SPECIALMESURE * 
     cout << "invalid choice" << endl;
     cout << "Answer yes or no please (y/n)" << endl << endl;
     cout << "Do yo want to modify the type name" << endl;
+    // cin.ignore();
     cin >> answer;
   }
   if(answer == 'y')
   {
     cout << "enter the new type name" << endl;
+    cin.ignore();
     cin.getline(temp_type,30);
   }
 
 
   cout << "Do yo want to modify the initial unit  name" << endl;
+  // cin.ignore();
   cin >> answer;
   while (answer != 'n' && answer != 'y')
   {
     cout << "invalid choice" << endl;
     cout << "Answer yes or no please (y/n)" << endl << endl;
     cout << "Do yo want to modify the initial unit name" << endl;
+    // cin.ignore();
     cin >> answer;
   }
   if(answer == 'y')
   {
     iftintial = true;
     cout << "enter the new intitial unit name" << endl;
+    cin.ignore();
     cin.getline(temp_intial_unit,10);
   }
 
   cout << "Do yo want to modify the final unit  name" << endl;
-  cin >> answer;
+  cin.ignore();
+  // cin >> answer;
   while (answer != 'n' && answer != 'y')
   {
     cout << "invalid choice" << endl;
     cout << "Answer yes or no please (y/n)" << endl << endl;
     cout << "Do yo want to modify the final unit name" << endl;
+    // cin.ignore();
     cin >> answer;
   }
 if(answer == 'y')
 {
   iffinal = true;
   cout << "enter the new final unit name" << endl;
+  cin.ignore();
   cin.getline(temp_final_unit,10);
 }
 
   cout << "Do yo want to modify the convertion constant" << endl;
+  // cin.ignore();
   cin >> answer;
   while (answer != 'n' && answer != 'y')
   {
     cout << "invalid choice" << endl;
     cout << "Answer yes or no please (y/n)" << endl << endl;
     cout << "Do yo want to modify the convetion constant" << endl;
+    // cin.ignore();
     cin >> answer;
   }
   if(answer == 'y')
   {
     ifconst = true;
     cout << "Enter the new convetion constante" << endl;
+    // cin.ignore();
     cin >> temp_constant;
   }
 
   cout << "Do yo want to modify the sign to be used" << endl;
+  cin.ignore();
   cin >> answer;
   while (answer != 'n' && answer != 'y')
   {
     cout << "invalid choice" << endl;
     cout << "Answer yes or no please (y/n)" << endl << endl;
     cout << "Do yo want to modify the sign to be used" << endl;
+    // cin.ignore();
     cin >> answer;
   }
   if(answer == 'y')
   {
     ifsign = true;
     cout << "enter the new sign to be used" << endl << "1  for addition" << endl << "2 for substraction" << endl << "3 for multiplication" << endl << "4 for division" << endl;
+    // cin.ignore();
     cin >> temp_sign_to_use;
     while (!(temp_sign_to_use >= 1 && temp_sign_to_use <= 4))
     {
       cout << "invalid entry" << endl;
       cout << "enter the new sign to be used" << endl << "1  for addition" << endl << "2 for substraction" << endl << "3 for multiplication" << endl << "4 for division" << endl;
+      // cin.ignore();
       cin >> temp_sign_to_use;
     }
   }
@@ -984,6 +1021,7 @@ void use_predifine_special_convertion_for_source(int a,int b,char name[10])
   //----------
 
   cout << "enter value to be converted" << endl;
+  // cin.ignore();
   cin >> convertion.valeur; // geting value to convert
   
   //----------converting and displaying result
@@ -995,8 +1033,10 @@ void use_predifine_special_convertion_for_source(int a,int b,char name[10])
   else if(a == b + 5 && convertion.prefixe != 3) cout << convertion.valeur << name << " litre" << " is equal to " << litre_to_gallon(convertion) << " gallon" << endl;
   //----------------
   
-  cout << endl << endl << "pres ENTER to proceed" << endl;
-  while(true) if(GetAsyncKeyState(0x0D)) break;
+  cout << endl << endl << "pres any leter to proceed" << endl;
+  char c;
+  // cin.ignore();
+  cin >> c;
 }
 
 
@@ -1024,6 +1064,7 @@ void use_predifine_special_convertion_for_dest(int a,int b,char name[10])
   //-------
 
   cout << "enter value to be converted" << endl;
+  // cin.ignore();
   cin >> valeur;// geting the value to be converted
 
   //----------converting value and displaying result
@@ -1035,8 +1076,11 @@ void use_predifine_special_convertion_for_dest(int a,int b,char name[10])
   else if(a == b + 6 && convertion.prefixe != 3) cout << valeur << " livre" << " is equal to " << gallon_to_litre(convertion,dest,valeur) << name << " metre" << endl;
   //--------------
   
-  cout << endl << endl << "pres ENTER to proceed" << endl;
-  while(true) if(GetAsyncKeyState(0x0D)) break;
+  cout << endl << endl << "pres any leter to proceed" << endl;
+  char c;
+  // cin.ignore();
+  cin >> c;
+  // while(true) if(GetAsyncKeyState(0x0D)) break;
 }
 
 //21
@@ -1049,11 +1093,15 @@ void use_special_convertion(SPECIALMESURE sp_messure)
   Sleep(1000);
   double valeur; // to store value to be converted
   cout << "enter value" << endl;
+  // cin.ignore();
   cin >> valeur; // geting value
   cout << valeur << " " <<  sp_messure.intial_unit << " is equal to " << special_convert(sp_messure,valeur) << " " << sp_messure.final_unit; // converting and display of result
 
-  cout << endl << endl << "pres ENTER to proceed" << endl;
-  while(true) if(GetAsyncKeyState(0x0D)) break;
+  cout << endl << endl << "pres any later to proceed" << endl;
+  char c;
+  // cin.ignore();
+  cin >> c;
+  // while(true) if(GetAsyncKeyState(0x0D)) break;
 }
 
 //22

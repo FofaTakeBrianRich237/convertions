@@ -1,3 +1,4 @@
 distance metre
-poid newton
+litre newton
 mas gramme
+s\kgeta\AppData\Local\Temp =C:\Users\kgeta\AppData\Local\Temp
